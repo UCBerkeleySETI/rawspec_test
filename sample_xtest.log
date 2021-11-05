@@ -1,0 +1,123 @@
+09:14:35  root  WARNING  Currently, the --h5 flag is ignored.
+09:14:35  runner  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
+09:14:35  runner  INFO  Node name = blpc0, CPU type = x86_64, HOME = /home/texadactyl
+09:14:35  runner  INFO  Created directory /datax/scratch/rawspec_test_trial/ with mode=0o777.
+09:14:35  runner  INFO  Current directory is now /datax/scratch/rawspec_test_trial/
+09:14:35  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /datax/scratch/rawspec_test_trial/  /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010` .....
+using requested GPU: 3
+working stem: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010
+opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0003.raw [No such file or directory]
+output product 0: 3 spectra
+09:14:50  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /datax/scratch/rawspec_test_trial/  /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008` .....
+using requested GPU: 3
+working stem: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008
+opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
+opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0003.raw [No such file or directory]
+output product 0: 3 spectra
+09:15:04  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil` .....
+numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+numexpr.utils   INFO     NumExpr defaulting to 8 threads.
+
+turbo_seti version 2.1.16
+blimpy version 2.0.30
+h5py version 2.10.0
+
+data_handler    INFO     Filterbank file detected. Attempting to create .h5 file in current directory...
+blimpy.waterfall INFO     Detecting high frequency resolution data.
+blimpy.waterfall INFO     __write_to_hdf5_heavy: For ./blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.h5, chunk_dim=(1, 1, 1048576), blob_dim=(3, 1, 67108864), n_blobs=1
+blimpy.waterfall INFO     __write_to_hdf5_heavy: Processing blob 1 of 1
+HDF5 header info: {'DIMENSION_LABELS': array([b'time', b'feed_id', b'frequency'], dtype=object), 'az_start': 0.0, 'data_type': 1, 'fch1': 7438.96484375, 'foff': -2.7939677238464355e-06, 'ibeam': -1, 'machine_id': 20, 'nbeams': 1, 'nbits': 32, 'nchans': 67108864, 'nifs': 1, 'rawdatafile': 'blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw', 'source_name': 'DIAG_FRB121102', 'src_dej': <Angle 33.1479 deg>, 'src_raj': <Angle 5.53295333 hourangle>, 'telescope_id': 6, 'tsamp': 18.253611007999982, 'tstart': 57991.57680555555, 'za_start': 0.0}
+
+Starting ET search with parameters: datafile=blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil, max_drift=10.0, min_drift=1e-05, snr=10.0, out_dir=./, coarse_chans=, flagging=False, n_coarse_chan=64, kernels=None, gpu_id=3, gpu_backend=True, blank_dc=True, precision=1, append_output=False, log_level_int=20, obs_info={'pulsar': 0, 'pulsar_found': 0, 'pulsar_dm': 0.0, 'pulsar_snr': 0.0, 'pulsar_stats': array([0., 0., 0., 0., 0., 0.]), 'RFI_level': 0.0, 'Mean_SEFD': 0.0, 'psrflux_Sens': 0.0, 'SEFDs_val': [0.0], 'SEFDs_freq': [0.0], 'SEFDs_freq_up': [0.0]}
+
+Computed drift rate resolution: 0.051021278705200256
+
+find_doppler.0  INFO     Spectra 3x3 postage stamp (0, 0, 0:3): [4519570.5  4540798.5  3899260.25]
+find_doppler.0  INFO     ::::::::::::::::::::::::: (1, 0, 0:3): [4178190.5 4680230.5 4761902. ]
+find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [4131520.75 4992740.5  4198172.  ]
+find_doppler.16 INFO     Top hit found! SNR 15.514752, Drift Rate -0.102043, index 806204
+find_doppler.16 INFO     Top hit found! SNR 12.034038, Drift Rate 0.867362, index 941967
+find_doppler.61 INFO     Top hit found! SNR 52.519356, Drift Rate -0.102043, index 90645
+Search time:  1.11 min
+09:16:14  dat2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
+09:16:14  hdr2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
+09:16:14  runner  INFO  Created post-turbo_seti tables.
+09:16:14  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil` .....
+numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+numexpr.utils   INFO     NumExpr defaulting to 8 threads.
+
+turbo_seti version 2.1.16
+blimpy version 2.0.30
+h5py version 2.10.0
+
+data_handler    INFO     Filterbank file detected. Attempting to create .h5 file in current directory...
+blimpy.waterfall INFO     Detecting high frequency resolution data.
+blimpy.waterfall INFO     __write_to_hdf5_heavy: For ./blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.h5, chunk_dim=(1, 1, 1048576), blob_dim=(3, 1, 67108864), n_blobs=1
+blimpy.waterfall INFO     __write_to_hdf5_heavy: Processing blob 1 of 1
+HDF5 header info: {'DIMENSION_LABELS': array([b'time', b'feed_id', b'frequency'], dtype=object), 'az_start': 0.0, 'data_type': 1, 'fch1': 6688.96484375, 'foff': -2.7939677238464355e-06, 'ibeam': -1, 'machine_id': 20, 'nbeams': 1, 'nbits': 32, 'nchans': 67108864, 'nifs': 1, 'rawdatafile': 'blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw', 'source_name': 'DIAG_PSR_J0332+5434', 'src_dej': <Angle 54.5788 deg>, 'src_raj': <Angle 3.54977333 hourangle>, 'telescope_id': 6, 'tsamp': 18.253611007999982, 'tstart': 57991.570810185185, 'za_start': 0.0}
+
+Starting ET search with parameters: datafile=blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil, max_drift=10.0, min_drift=1e-05, snr=10.0, out_dir=./, coarse_chans=, flagging=False, n_coarse_chan=64, kernels=None, gpu_id=3, gpu_backend=True, blank_dc=True, precision=1, append_output=False, log_level_int=20, obs_info={'pulsar': 0, 'pulsar_found': 0, 'pulsar_dm': 0.0, 'pulsar_snr': 0.0, 'pulsar_stats': array([0., 0., 0., 0., 0., 0.]), 'RFI_level': 0.0, 'Mean_SEFD': 0.0, 'psrflux_Sens': 0.0, 'SEFDs_val': [0.0], 'SEFDs_freq': [0.0], 'SEFDs_freq_up': [0.0]}
+
+Computed drift rate resolution: 0.051021278705200256
+
+find_doppler.0  INFO     Spectra 3x3 postage stamp (0, 0, 0:3): [800914.25 830376.5  932874.25]
+find_doppler.0  INFO     ::::::::::::::::::::::::: (1, 0, 0:3): [808807.4375 924503.25   908501.8125]
+find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [ 704653.5    1001697.8125 1070757.875 ]
+find_doppler.60 INFO     Top hit found! SNR 11.463472, Drift Rate -0.255106, index 441634
+Search time:  1.21 min
+09:17:30  dat2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
+09:17:30  hdr2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+09:17:30  runner  INFO  Created post-turbo_seti tables.
+09:17:30  runner  INFO  Running `rm *.dat *.fil *.h5 *.log` .....
+09:17:30  runner  INFO  Bye-bye, elapsed hh:mm:ss = 0:02:54.994542
+09:17:31  reviewer  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
+09:17:31  reviewer  INFO  Node name = blpc0, CPU type = x86_64, HOME = /home/texadactyl
+09:17:31  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
+09:17:31  compare_tbldat  INFO  Row 0 for top_hit_id ok
+09:17:31  compare_tbldat  INFO  Row 1 for top_hit_id ok
+09:17:31  compare_tbldat  INFO  Row 2 for top_hit_id ok
+09:17:31  compare_tbldat  INFO  Row 0 for drift_rate ok
+09:17:31  compare_tbldat  INFO  Row 1 for drift_rate ok
+09:17:31  compare_tbldat  INFO  Row 2 for drift_rate ok
+09:17:31  compare_tbldat  INFO  Row 0 for snr ok
+09:17:31  compare_tbldat  INFO  Row 1 for snr ok
+09:17:31  compare_tbldat  INFO  Row 2 for snr ok
+09:17:31  compare_tbldat  INFO  Row 0 for frequency ok
+09:17:31  compare_tbldat  INFO  Row 1 for frequency ok
+09:17:31  compare_tbldat  INFO  Row 2 for frequency ok
+09:17:31  compare_tbldat  INFO  Row 0 for total_num_hits ok
+09:17:31  compare_tbldat  INFO  Row 1 for total_num_hits ok
+09:17:31  compare_tbldat  INFO  Row 2 for total_num_hits ok
+09:17:31  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
+09:17:31  compare_tbldat  INFO  Row 0 for top_hit_id ok
+09:17:31  compare_tbldat  INFO  Row 0 for drift_rate ok
+09:17:31  compare_tbldat  INFO  Row 0 for snr ok
+09:17:31  compare_tbldat  INFO  Row 0 for frequency ok
+09:17:31  compare_tbldat  INFO  Row 0 for total_num_hits ok
+09:17:31  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
+09:17:31  compare_tblhdr  INFO  Row 0 for fch1 ok
+09:17:31  compare_tblhdr  INFO  Row 0 for foff ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nbits ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nchans ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nifs ok
+09:17:31  compare_tblhdr  INFO  Row 0 for rawdatafile ok
+09:17:31  compare_tblhdr  INFO  Row 0 for source_name ok
+09:17:31  compare_tblhdr  INFO  Row 0 for tsamp ok
+09:17:31  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
+09:17:31  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+09:17:31  compare_tblhdr  INFO  Row 0 for fch1 ok
+09:17:31  compare_tblhdr  INFO  Row 0 for foff ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nbits ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nchans ok
+09:17:31  compare_tblhdr  INFO  Row 0 for nifs ok
+09:17:31  compare_tblhdr  INFO  Row 0 for rawdatafile ok
+09:17:31  compare_tblhdr  INFO  Row 0 for source_name ok
+09:17:31  compare_tblhdr  INFO  Row 0 for tsamp ok
+09:17:31  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
+09:17:31  reviewer  INFO  *SUCCESS* - No errors reported.
+
