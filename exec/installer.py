@@ -122,7 +122,7 @@ def main(args=None):
             
         # Remove old artifacts.
         try:
-            cmd = "rm {}/*".format(BASELINE_DIR)
+            cmd = "rm -rf {}/*".format(BASELINE_DIR)
             os.system(cmd)
         except:
             oops("FAILED: {}".format(cmd))
