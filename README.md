@@ -19,7 +19,7 @@ Both table file types are implemented as CSV files.
 
 In theory, the installation only needs to be done once (famous last words?).  Of course, more test .raw files can be incorporated in the future to expand the testing scope.  Precisely how to add to the existing .raw file set and generate the new test table files is TBD (but not difficult).
 
-As of 2021-10-31, this step was completed with the following script execution:
+As of 2021-11-06, this step was completed with the following script execution:
 ```python3 installer.py  -g 3```. 
 
 ## Test Baseline Contents
