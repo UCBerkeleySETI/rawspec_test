@@ -41,8 +41,8 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 ## Prerequisites to Testing
 
 * Login to any data centre node.
-* If this repository (rawspec_test) has not yet been installed, then
-     - ```git clone https://github.com/UCBerkeleySETI/rawspec_test```.
+* If this repository (rawspec_testing) has not yet been installed, then
+     - ```git clone https://github.com/UCBerkeleySETI/rawspec_testing```.
 * Do the following Python package updates in the order specified:
      - ```pip  install  -U  --user  blimpy```
      - ```pip  install  -U  --user  turbo_seti```
