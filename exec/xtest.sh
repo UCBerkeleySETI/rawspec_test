@@ -40,7 +40,7 @@ check_id $GPU_ID
 export PATH=$HOME/rawspec:$PATH
 export LD_LIBRARY_PATH=$HOME/rawspec
 
-cd $HOME/rawspec_test/exec
+cd $HOME/rawspec_testing/exec
 python3 runner.py -g $GPU_ID
 if [ $? -eq 0 ]; then
     python3 reviewer.py
