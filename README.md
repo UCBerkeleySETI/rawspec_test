@@ -4,7 +4,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 ### Test Baseline Installation
 
-The ```rawspec``` testing baseline resides at  ```/datax/scratch/rawspec_test_baseline/``` on node ```blpc0``` and consists of the following:
+The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing_baseline/ and consists of the following:
 * .raw files provided by Matt Lebofsky
 * 2 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession, representing baseline results that will be used for validating future ```rawspec``` runs. 
 
