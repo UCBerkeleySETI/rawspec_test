@@ -20,7 +20,7 @@ SELECTED = [
     ]
 
 BASELINE_DIR = "/mnt_blpd20/scratch/rawspec_testing_baseline/"
-TRIAL_DIR = BASELINE_DIR + "/rawspec_testing_trial/"
+TRIAL_DIR = BASELINE_DIR + "rawspec_testing_trial/"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
 TIME_FORMAT = "%H:%M:%S"
