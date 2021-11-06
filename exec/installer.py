@@ -109,7 +109,7 @@ def main(args=None):
         # Interact with the operator if not in batch mode.
         if not args.flag_batch:
             logger.info("installer: This utility script is about to initialise the rawspec test baseline.")
-            logger.info("installer: Baseline directory will be {}".format(BASELINE_DIR))
+            logger.info("installer: Baseline directory will be {}.".format(BASELINE_DIR))
             logger.info("installer: The first step is to remove the old one if it exists.")
             answer = input("\ninstaller: Okay to proceed? (yes/[anything else]: ")
             if answer != "yes":
