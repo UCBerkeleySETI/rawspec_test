@@ -1,4 +1,4 @@
-# rawspec_test
+# rawspec_testing
 
 The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
 
@@ -50,7 +50,7 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 ## Testing a New Pull Request
 
 * Login to any data centre node.
-* Go to $HOME/rawspec_test/exec 
+* Go to $HOME/rawspec_testing/exec 
 *  Edit the ```xprep.sh``` script to supply the PR's URL and BRANCH values.
 * ```bash xprep.sh```
 * ```bash xtest.sh  <GPU_ID>```
@@ -71,7 +71,7 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 * `set -e` so that if anything goes wrong, immediately exit.
 * Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
 * Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
-* Go to $HOME/rawspec_test/exec
+* Go to $HOME/rawspec_testing/exec
 * Generate trial results: ```python3 runner.py -g <GPU ID>```.
 * Compare trial results to that of the baseline: ```python3 reviewer.py```.
 
