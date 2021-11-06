@@ -9,7 +9,6 @@ import sys
 import logging
 
 MY_VERSION = "1.0"
-CORRECT_NODE = "blpc0"
 TS_SNR_THRESHOLD = 10
 
 SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
@@ -20,8 +19,8 @@ SELECTED = [
     SOURCE_DIR_2 + "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
     ]
 
-BASELINE_DIR = "/datax/scratch/rawspec_test_baseline/"
-TRIAL_DIR = "/datax/scratch/rawspec_test_trial/"
+BASELINE_DIR = "/mnt_blpd20/scratch/rawspec_testing_baseline/"
+TRIAL_DIR = BASELINE_DIR + "rawspec_testing_trial/"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
 TIME_FORMAT = "%H:%M:%S"

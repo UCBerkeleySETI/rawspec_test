@@ -19,7 +19,7 @@ import glob
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, CORRECT_NODE, MY_VERSION, TRIAL_DIR, \
+from common import BASELINE_DIR, MY_VERSION, TRIAL_DIR, \
                    oops, set_up_logger
 from compare_2_csvs import compare_tbldat, compare_tblhdr
 
@@ -67,9 +67,6 @@ def main(args=None):
                 .format(osinfo.sysname, osinfo.release, osinfo.version))
     logger.info("Node name = {}, CPU type = {}, HOME = {}"
                 .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
-    if osinfo.nodename != CORRECT_NODE:
-        oops("Must run on node '{}' but this node is named '{}'!!"
-             .format(CORRECT_NODE, osinfo.nodename))
 
     # BASELINE_DIR exist?
     if not os.path.exists(BASELINE_DIR):

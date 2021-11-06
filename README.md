@@ -40,16 +40,16 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 
 ## Prerequisites to Testing
 
-* Login to ```blpc0```.
+* Login to any data centre node.
 * If this repository (rawspec_test) has not yet been installed, then
-     - ```git clone <URL>```.
+     - ```git clone https://github.com/UCBerkeleySETI/rawspec_test```.
 * Do the following Python package updates in the order specified:
      - ```pip  install  -U  --user  blimpy```
      - ```pip  install  -U  --user  turbo_seti```
 
 ## Testing a New Pull Request
 
-* Login to ```blpc0```.
+* Login to any data centre node.
 * Go to $HOME/rawspec_test/exec 
 *  Edit the ```xprep.sh``` script to supply the PR's URL and BRANCH values.
 * ```bash xprep.sh```
@@ -77,7 +77,7 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 
 ### runner.py
 
-The ```runner.py``` script builds a testing trial directory at ```/datax/scratch/rawspec_test_trial/``` on ```blpc0```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).
+The ```runner.py``` script builds a testing trial directory at ```/datax/scratch/rawspec_testing_trial/```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).
 
 ### reviewer.py
 

@@ -31,7 +31,7 @@ from datetime import timedelta
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, CORRECT_NODE, MY_VERSION, \
+from common import BASELINE_DIR, MY_VERSION, \
                    SELECTED, TS_SNR_THRESHOLD, oops, set_up_logger
 import dat2tbl
 import hdr2tbl
@@ -99,43 +99,33 @@ def main(args=None):
     if args.flag_skip_init:
         logger.info("Skipping pre-rawspec initialisation at the operator's request")
     else:
-        # On the right system?
+        # Show system information.
         osinfo = os.uname()
         logger.info("O/S name = {}, release = {}, version = {}"
                     .format(osinfo.sysname, osinfo.release, osinfo.version))
         logger.info("Node name = {}, CPU type = {}, HOME = {}"
                     .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
-        if osinfo.nodename != CORRECT_NODE:
-            oops("Must run on node '{}' but this node is named '{}'!!"
-                 .format(CORRECT_NODE, osinfo.nodename))
 
         # Interact with the operator if not in batch mode.
         if not args.flag_batch:
             logger.info("installer: This utility script is about to initialise the rawspec test baseline.")
-            logger.info("installer: The first step is to remove the old one if it exists.")
+            logger.info("installer: Baseline directory will be {}.".format(BASELINE_DIR))
+            logger.info("installer: The first step is to remove old artifacts if they exist.")
             answer = input("\ninstaller: Okay to proceed? (yes/[anything else]: ")
             if answer != "yes":
                 logger.warning("installer: Execution canceled by the operator.")
                 sys.exit(0)
 
-        # BASELINE_DIR still exist?
-        if os.path.exists(BASELINE_DIR): # Yes, it exists.
-            try:
-                shutil.rmtree(BASELINE_DIR, ignore_errors=True)
-            except:
-                oops("shutil.rmtree({}) FAILED !!".format(BASELINE_DIR))
-
-        # Create BASELINE_DIR.
+        # BASELINE_DIR exists?
+        if not os.path.exists(BASELINE_DIR): # No, it does not.
+            oops("Baseline {} does not exist !!".format(BASELINE_DIR))
+            
+        # Remove old artifacts.
         try:
-            os.mkdir(BASELINE_DIR)
-            mode = stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
-            os.chmod(BASELINE_DIR, mode=mode)
-            logger.info("Created directory {} with mode={}."
-                  .format(BASELINE_DIR, oct(mode)))
+            cmd = "rm -rf {}/*".format(BASELINE_DIR)
+            os.system(cmd)
         except:
-            oops("os.mkdir/os.chmod({}, mode={}) FAILED !!"
-                 .format(BASELINE_DIR, oct(mode)))
-
+            oops("FAILED: {}".format(cmd))
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
