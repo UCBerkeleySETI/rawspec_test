@@ -1,25 +1,29 @@
-09:14:35  root  WARNING  Currently, the --h5 flag is ignored.
-09:14:35  runner  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
-09:14:35  runner  INFO  Node name = blpc0, CPU type = x86_64, HOME = /home/texadactyl
-09:14:35  runner  INFO  Created directory /datax/scratch/rawspec_test_trial/ with mode=0o777.
-09:14:35  runner  INFO  Current directory is now /datax/scratch/rawspec_test_trial/
-09:14:35  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /datax/scratch/rawspec_test_trial/  /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010` .....
+bash xtest.sh 3
+11:04:03  runner  INFO  Logging set up complete.
+11:04:03  root  WARNING  Currently, the --h5 flag is ignored.
+11:04:03  runner  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
+11:04:03  runner  INFO  Node name = blpc1, CPU type = x86_64, HOME = /home/texadactyl
+11:04:03  runner  INFO  Created directory /mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial/ with mode=0o777.
+11:04:03  runner  INFO  Current directory is now /mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial/
+11:04:03  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial/  /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010` .....
 using requested GPU: 3
-working stem: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010
-opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0003.raw [No such file or directory]
+rawspec using librawspec 2.5.0+5@g7c0bf4f cuFFT 10.2.1.245
+working stem: /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0003.raw [No such file or directory]
 output product 0: 3 spectra
-09:14:50  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /datax/scratch/rawspec_test_trial/  /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008` .....
+11:07:17  runner  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  -d /mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial/  /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008` .....
 using requested GPU: 3
-working stem: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008
-opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
-opening file: /datax/scratch/rawspec_test_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0003.raw [No such file or directory]
+rawspec using librawspec 2.5.0+5@g7c0bf4f cuFFT 10.2.1.245
+working stem: /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
+opening file: /mnt_blpd20/scratch/rawspec_testing_baseline/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0003.raw [No such file or directory]
 output product 0: 3 spectra
-09:15:04  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil` .....
+11:10:00  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil` .....
 numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 numexpr.utils   INFO     NumExpr defaulting to 8 threads.
 
@@ -43,11 +47,12 @@ find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [4131520.75 4992
 find_doppler.16 INFO     Top hit found! SNR 15.514752, Drift Rate -0.102043, index 806204
 find_doppler.16 INFO     Top hit found! SNR 12.034038, Drift Rate 0.867362, index 941967
 find_doppler.61 INFO     Top hit found! SNR 52.519356, Drift Rate -0.102043, index 90645
-Search time:  1.11 min
-09:16:14  dat2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
-09:16:14  hdr2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
-09:16:14  runner  INFO  Created post-turbo_seti tables.
-09:16:14  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil` .....
+Search time:  1.35 min
+11:11:30  dat2tbl  INFO  Logging set up complete.
+11:11:30  dat2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
+11:11:30  hdr2tbl  INFO  Logging set up complete.
+11:11:30  hdr2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
+11:11:30  runner  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil` .....
 numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 numexpr.utils   INFO     NumExpr defaulting to 8 threads.
 
@@ -69,55 +74,61 @@ find_doppler.0  INFO     Spectra 3x3 postage stamp (0, 0, 0:3): [800914.25 83037
 find_doppler.0  INFO     ::::::::::::::::::::::::: (1, 0, 0:3): [808807.4375 924503.25   908501.8125]
 find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [ 704653.5    1001697.8125 1070757.875 ]
 find_doppler.60 INFO     Top hit found! SNR 11.463472, Drift Rate -0.255106, index 441634
-Search time:  1.21 min
-09:17:30  dat2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
-09:17:30  hdr2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
-09:17:30  runner  INFO  Created post-turbo_seti tables.
-09:17:30  runner  INFO  Running `rm *.dat *.fil *.h5 *.log` .....
-09:17:30  runner  INFO  Bye-bye, elapsed hh:mm:ss = 0:02:54.994542
-09:17:31  reviewer  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
-09:17:31  reviewer  INFO  Node name = blpc0, CPU type = x86_64, HOME = /home/texadactyl
-09:17:31  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
-09:17:31  compare_tbldat  INFO  Row 0 for top_hit_id ok
-09:17:31  compare_tbldat  INFO  Row 1 for top_hit_id ok
-09:17:31  compare_tbldat  INFO  Row 2 for top_hit_id ok
-09:17:31  compare_tbldat  INFO  Row 0 for drift_rate ok
-09:17:31  compare_tbldat  INFO  Row 1 for drift_rate ok
-09:17:31  compare_tbldat  INFO  Row 2 for drift_rate ok
-09:17:31  compare_tbldat  INFO  Row 0 for snr ok
-09:17:31  compare_tbldat  INFO  Row 1 for snr ok
-09:17:31  compare_tbldat  INFO  Row 2 for snr ok
-09:17:31  compare_tbldat  INFO  Row 0 for frequency ok
-09:17:31  compare_tbldat  INFO  Row 1 for frequency ok
-09:17:31  compare_tbldat  INFO  Row 2 for frequency ok
-09:17:31  compare_tbldat  INFO  Row 0 for total_num_hits ok
-09:17:31  compare_tbldat  INFO  Row 1 for total_num_hits ok
-09:17:31  compare_tbldat  INFO  Row 2 for total_num_hits ok
-09:17:31  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
-09:17:31  compare_tbldat  INFO  Row 0 for top_hit_id ok
-09:17:31  compare_tbldat  INFO  Row 0 for drift_rate ok
-09:17:31  compare_tbldat  INFO  Row 0 for snr ok
-09:17:31  compare_tbldat  INFO  Row 0 for frequency ok
-09:17:31  compare_tbldat  INFO  Row 0 for total_num_hits ok
-09:17:31  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
-09:17:31  compare_tblhdr  INFO  Row 0 for fch1 ok
-09:17:31  compare_tblhdr  INFO  Row 0 for foff ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nbits ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nchans ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nifs ok
-09:17:31  compare_tblhdr  INFO  Row 0 for rawdatafile ok
-09:17:31  compare_tblhdr  INFO  Row 0 for source_name ok
-09:17:31  compare_tblhdr  INFO  Row 0 for tsamp ok
-09:17:31  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
-09:17:31  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
-09:17:31  compare_tblhdr  INFO  Row 0 for fch1 ok
-09:17:31  compare_tblhdr  INFO  Row 0 for foff ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nbits ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nchans ok
-09:17:31  compare_tblhdr  INFO  Row 0 for nifs ok
-09:17:31  compare_tblhdr  INFO  Row 0 for rawdatafile ok
-09:17:31  compare_tblhdr  INFO  Row 0 for source_name ok
-09:17:31  compare_tblhdr  INFO  Row 0 for tsamp ok
-09:17:31  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
-09:17:31  reviewer  INFO  *SUCCESS* - No errors reported.
-
+Search time:  1.26 min
+11:12:49  dat2tbl  INFO  Logging set up complete.
+11:12:49  dat2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
+11:12:49  hdr2tbl  INFO  Logging set up complete.
+11:12:49  hdr2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+11:12:49  runner  INFO  Created post-turbo_seti tables.
+11:12:49  runner  INFO  Running `rm *.dat *.fil *.h5 *.log` .....
+11:12:49  runner  INFO  Bye-bye, elapsed hh:mm:ss = 0:08:46.179064
+11:12:50  reviewer  INFO  Logging set up complete.
+11:12:50  reviewer  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
+11:12:50  reviewer  INFO  Node name = blpc1, CPU type = x86_64, HOME = /home/texadactyl
+11:12:50  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
+11:12:50  compare_tbldat  INFO  Logging set up complete.
+11:12:50  compare_tbldat  INFO  Row 0 for top_hit_id ok
+11:12:50  compare_tbldat  INFO  Row 1 for top_hit_id ok
+11:12:50  compare_tbldat  INFO  Row 2 for top_hit_id ok
+11:12:50  compare_tbldat  INFO  Row 0 for drift_rate ok
+11:12:50  compare_tbldat  INFO  Row 1 for drift_rate ok
+11:12:50  compare_tbldat  INFO  Row 2 for drift_rate ok
+11:12:50  compare_tbldat  INFO  Row 0 for snr ok
+11:12:50  compare_tbldat  INFO  Row 1 for snr ok
+11:12:50  compare_tbldat  INFO  Row 2 for snr ok
+11:12:50  compare_tbldat  INFO  Row 0 for frequency ok
+11:12:50  compare_tbldat  INFO  Row 1 for frequency ok
+11:12:50  compare_tbldat  INFO  Row 2 for frequency ok
+11:12:50  compare_tbldat  INFO  Row 0 for total_num_hits ok
+11:12:50  compare_tbldat  INFO  Row 1 for total_num_hits ok
+11:12:50  compare_tbldat  INFO  Row 2 for total_num_hits ok
+11:12:50  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
+11:12:50  compare_tbldat  INFO  Logging set up complete.
+11:12:50  compare_tbldat  INFO  Row 0 for top_hit_id ok
+11:12:50  compare_tbldat  INFO  Row 0 for drift_rate ok
+11:12:50  compare_tbldat  INFO  Row 0 for snr ok
+11:12:50  compare_tbldat  INFO  Row 0 for frequency ok
+11:12:50  compare_tbldat  INFO  Row 0 for total_num_hits ok
+11:12:50  reviewer  INFO  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
+11:12:50  compare_tblhdr  INFO  Logging set up complete.
+11:12:50  compare_tblhdr  INFO  Row 0 for fch1 ok
+11:12:50  compare_tblhdr  INFO  Row 0 for foff ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nbits ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nchans ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nifs ok
+11:12:50  compare_tblhdr  INFO  Row 0 for rawdatafile ok
+11:12:50  compare_tblhdr  INFO  Row 0 for source_name ok
+11:12:50  compare_tblhdr  INFO  Row 0 for tsamp ok
+11:12:50  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
+11:12:50  reviewer  INFO  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+11:12:50  compare_tblhdr  INFO  Logging set up complete.
+11:12:50  compare_tblhdr  INFO  Row 0 for fch1 ok
+11:12:50  compare_tblhdr  INFO  Row 0 for foff ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nbits ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nchans ok
+11:12:50  compare_tblhdr  INFO  Row 0 for nifs ok
+11:12:50  compare_tblhdr  INFO  Row 0 for rawdatafile ok
+11:12:50  compare_tblhdr  INFO  Row 0 for source_name ok
+11:12:50  compare_tblhdr  INFO  Row 0 for tsamp ok
+11:12:50  compare_tblhdr  INFO  Row 0 for n_ints_in_file ok
+11:12:50  reviewer  INFO  *SUCCESS* - No errors reported.
