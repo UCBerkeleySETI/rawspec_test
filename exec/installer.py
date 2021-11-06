@@ -31,7 +31,7 @@ from datetime import timedelta
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, CORRECT_NODE, MY_VERSION, \
+from common import BASELINE_DIR, MY_VERSION, \
                    SELECTED, TS_SNR_THRESHOLD, oops, set_up_logger
 import dat2tbl
 import hdr2tbl
@@ -99,15 +99,12 @@ def main(args=None):
     if args.flag_skip_init:
         logger.info("Skipping pre-rawspec initialisation at the operator's request")
     else:
-        # On the right system?
+        # Show system information.
         osinfo = os.uname()
         logger.info("O/S name = {}, release = {}, version = {}"
                     .format(osinfo.sysname, osinfo.release, osinfo.version))
         logger.info("Node name = {}, CPU type = {}, HOME = {}"
                     .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
-        if osinfo.nodename != CORRECT_NODE:
-            oops("Must run on node '{}' but this node is named '{}'!!"
-                 .format(CORRECT_NODE, osinfo.nodename))
 
         # Interact with the operator if not in batch mode.
         if not args.flag_batch:
