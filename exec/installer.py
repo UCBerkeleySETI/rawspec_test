@@ -119,6 +119,13 @@ def main(args=None):
         # BASELINE_DIR exists?
         if not os.path.exists(BASELINE_DIR): # No, it does not.
             oops("Baseline {} does not exist !!".format(BASELINE_DIR))
+            
+        # Remove old artifacts.
+        try:
+            cmd = "rm {}/*".format(BASELINE_DIR)
+            os.system(cmd)
+        except:
+            oops("FAILED: {}".format(cmd))
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
