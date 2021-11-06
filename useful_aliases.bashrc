@@ -5,7 +5,7 @@ alias rtml='cd /mnt_blpd5/datax/FRB121102/BLP13'
 alias rtbl='cd /mnt_blpd20/rawspec_testing_baseline/'
 
 # GOTO the rawspec test trial.
-alias rttr='cd /mnt_blpd20/rawspec_testing_trial/'
+alias rttr='cd /mnt_blpd20/rawspec_testing_baseline/rawspec_testing_trial/'
 
 # GOTO the test execution directory.
 alias rtx='cd $HOME/rawspec_test/exec'
