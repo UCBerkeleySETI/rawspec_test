@@ -116,24 +116,9 @@ def main(args=None):
                 logger.warning("installer: Execution canceled by the operator.")
                 sys.exit(0)
 
-        # BASELINE_DIR still exist?
-        if os.path.exists(BASELINE_DIR): # Yes, it exists.
-            try:
-                shutil.rmtree(BASELINE_DIR, ignore_errors=True)
-            except:
-                oops("shutil.rmtree({}) FAILED !!".format(BASELINE_DIR))
-
-        # Create BASELINE_DIR.
-        try:
-            os.mkdir(BASELINE_DIR)
-            mode = stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
-            os.chmod(BASELINE_DIR, mode=mode)
-            logger.info("Created directory {} with mode={}."
-                  .format(BASELINE_DIR, oct(mode)))
-        except:
-            oops("os.mkdir/os.chmod({}, mode={}) FAILED !!"
-                 .format(BASELINE_DIR, oct(mode)))
-
+        # BASELINE_DIR exists?
+        if not os.path.exists(BASELINE_DIR): # No, it does not.
+            oops("Baseline {} does not exist !!".format(BASELINE_DIR))
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
