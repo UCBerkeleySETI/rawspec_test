@@ -8,4 +8,4 @@ alias rtbl='cd /mnt_blpd20/scratch/rawspec_testing_baseline/'
 alias rttr='cd /mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial/'
 
 # GOTO the test execution directory.
-alias rtx='cd $HOME/rawspec_test/exec'
+alias rtx='cd $HOME/rawspec_testing/exec'
