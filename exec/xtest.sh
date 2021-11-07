@@ -6,6 +6,7 @@ HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
 > $LOG # Make the log nil.
 set -e
+set -o pipefail
 
 function oops {
 	echo
