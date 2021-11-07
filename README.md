@@ -38,7 +38,9 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 
 
-## Prerequisites to Testing
+## Prerequisites to All Activity
+
+Before doing anything else related to rawspec_testing, follow this procedure.
 
 * Login to any data centre node.
 * If this repository (rawspec_testing) has not yet been installed, then
@@ -46,6 +48,14 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 * Do the following Python package updates in the order specified:
      - ```pip  install  -U  --user  blimpy```
      - ```pip  install  -U  --user  turbo_seti```
+
+## Installing the Testing Baseline (caution!)
+
+IMPORTANT: This procedure is generally unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the test data itself.  Still, consider simpler methods before using this procedure.
+
+* Login to any data centre node.
+* Go to $HOME/rawspec_testing/exec 
+* ```bash xinstall.sh```
 
 ## Testing a New Pull Request
 
