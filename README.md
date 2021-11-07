@@ -103,7 +103,7 @@ TBD
 
 ### 6.2 runner.py
 
-The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
+The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti```, and the testing utility scripts (```npols2tbl.py```, ```dat2tbl.py```, and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
 
 ### 6.3 reviewer.py
 
