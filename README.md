@@ -65,9 +65,15 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 
 ## 5.0 Bash Script Overviews
 
-### 5.1 xinstall.sh Overview :: The Mechanics of Installation
+### 5.1 xinstall.sh Overview :: Driver for the installer.py Python Script
 
-TBD
+* Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
+* Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
+* If an old rawspec exists under $HOME, purge it.
+* `git clone -branch master https://github.com/UCBerkeleySETI/rawspec`
+* `cd rawspec`
+* `make`
+* `python3 installer.py -g 3`
 
 ### 5.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
 
