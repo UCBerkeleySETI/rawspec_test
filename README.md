@@ -18,9 +18,7 @@ The table files are as follows:
 
 All table file types are implemented as CSV files.
 
-## 2.0 Testing Baseline Contents
-
-The following files are in the testing baseline directory:
+The following is a listing of the testing baseline directory (excluding the trial directory):
 ```
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
@@ -34,7 +32,7 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 rawspectest.tblnpols
 ```
-## 3.0 Prerequisites to All Activity
+## 2.0 Prerequisites to All Activity
 
 Before doing anything else related to rawspec_testing, follow this procedure.
 
@@ -45,9 +43,9 @@ Before doing anything else related to rawspec_testing, follow this procedure.
      - ```pip  install  -U  --user  blimpy```
      - ```pip  install  -U  --user  turbo_seti```
 
-## 4.0 Testing Operations
+## 3.0 Testing Operations
 
-### 4.1 Installing the Testing Baseline (caution!)
+### 3.1 Installing the Testing Baseline (caution!)
 
 IMPORTANT: This procedure is generally unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the test data itself.  Still, consider simpler methods before using this procedure.
 
@@ -55,7 +53,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Go to $HOME/rawspec_testing/exec 
 * ```bash xinstall.sh```
 
-### 4.2 Testing a New Pull Request
+### 3.2 Testing a New Pull Request
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
@@ -63,9 +61,9 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * ```bash xprep.sh```
 * ```bash xtest.sh  <GPU_ID>```
 
-## 5.0 Bash Script Overviews
+## 4.0 Bash Script Overviews
 
-### 5.1 xinstall.sh Overview :: Driver for the installer.py Python Script
+### 4.1 xinstall.sh Overview :: Driver for the installer.py Python Script
 
 * Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
 * Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
@@ -75,7 +73,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * `make`
 * `python3 installer.py -g 3`
 
-### 5.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
+### 4.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
 
 * Validate URL and BRANCH.
 * Go $HOME.
@@ -84,7 +82,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * `cd rawspec`
 * `make`
 
-### 5.3 xtest.sh Overview :: Run Tests and Evaluate Results
+### 4.3 xtest.sh Overview :: Run Tests and Evaluate Results
 
 * Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
 * Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
@@ -92,9 +90,9 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Generate trial results: ```python3 runner.py -g <GPU ID>```.
 * Compare trial results to that of the baseline: ```python3 reviewer.py```.
 
-## 6.0 Python Script Overviews
+## 5.0 Python Script Overviews
 
-### 6.1 installer.py
+### 5.1 installer.py
 
 * Print out system information and prompt the operator whether or not to continue (yes/no).
 * Assume continuing.  Purge everything under the existing baseline directory.
@@ -106,10 +104,10 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * For each .dat file produced by turboSETI, run dat2tbl.main producing a .tbldat file.
 * ```rm *.dat *.fil *.h5 *.log```.
 
-### 6.2 runner.py
+### 5.2 runner.py
 
 The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti```, and the testing utility scripts (```npols2tbl.py```, ```dat2tbl.py```, and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
 
-### 6.3 reviewer.py
+### 5.3 reviewer.py
 
 The ```reviewer.py``` script compares the corresponding table files from the baseline and trial directories.  Successful comparisons are logged as informational messages.  Discrepancies are logged as errors.  Any error found should be investigated as soon as possible.
