@@ -73,11 +73,6 @@ def main(args=None):
                         default=False,
                         action="store_true",
                         help="Flag: Skip cleanup at end?  Large files are left in baseline.")
-    parser.add_argument("-U", "--rawspectest_only",
-                        dest="flag_rawspectest_only",
-                        default=False,
-                        action="store_true",
-                        help="Flag: Install rawspectest .tblnpols file only i.e. skip everything else?")
     parser.add_argument("-v", "--version",
                         dest="show_version",
                         default=False,
@@ -99,13 +94,6 @@ def main(args=None):
 
     # Take a timestamp
     time1 = time.time()
-
-    # rawspectest cases.
-    tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
-    npols2tbl.main([tblnpols_name])
-    if args.flag_rawspectest_only:
-        logger.info("Only installed the rawspectest .tblpols file at the operator's request")
-        sys.exit(0)
 
     # Skip initialisation?
     if args.flag_skip_init:
@@ -135,6 +123,10 @@ def main(args=None):
         # Remove old artifacts.
         cmd = "rm -rf {}/*".format(BASELINE_DIR)
         run_cmd(cmd, logger)
+
+        # Create rawspectest baseline table.
+        tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
+        npols2tbl.main([tblnpols_name])
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
