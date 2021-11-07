@@ -124,10 +124,6 @@ def main(args=None):
         cmd = "rm -rf {}/*".format(BASELINE_DIR)
         run_cmd(cmd, logger)
 
-        # Create rawspectest baseline table.
-        tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
-        npols2tbl.main([tblnpols_name])
-
         # Copy the selected files to BASELINE_DIR.
         counter = 0
         for one_item in SELECTED:
@@ -173,6 +169,10 @@ def main(args=None):
         except:
             oops("hdr2tbl.main({}, {}) FAILED !!".format(h5_name, tblhdr_name))
         logger.info("Created post-turbo_seti tables.")
+
+    # Create rawspectest baseline table.
+    tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
+    npols2tbl.main([tblnpols_name])
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
