@@ -1,0 +1,28 @@
+No pre-existing copy of rawspec present.
+
+git clone from URL https://github.com/UCBerkeleySETI/rawspec, branch master .....
+Cloning into 'rawspec'...
+
+make rawspec .....
+#define RAWSPEC_VERSION 2.5.0+5@g7c0bf4f
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec.o rawspec.c
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_file.o rawspec_file.c
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_socket.o rawspec_socket.c
+/usr/local/cuda/bin/nvcc -ccbin g++ -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -dc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o rawspec_gpu.o -c rawspec_gpu.cu
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_fbutils.o rawspec_fbutils.c
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_rawutils.o rawspec_rawutils.c
+/usr/local/cuda/bin/nvcc -ccbin g++ -shared -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o librawspec.so rawspec_gpu.o rawspec_fbutils.o rawspec_rawutils.o -lcufft_static -lculibos
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/usr/local/cuda/bin/nvcc -ccbin g++ -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o rawspec rawspec.o rawspec_file.o rawspec_socket.o librawspec.so -L. -lrawspec
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspectest.o rawspectest.c
+/usr/local/cuda/bin/nvcc -ccbin g++ -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o rawspectest rawspectest.o librawspec.so -L. -lrawspec
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o fileiotest.o fileiotest.c
+/usr/local/cuda/bin/nvcc -ccbin g++ -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o fileiotest fileiotest.o librawspec.so -L. -lrawspec
+nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+
+========
+FINISHED
+========
