@@ -26,8 +26,7 @@ def do_nbits(wfh, nbits):
 
     """
     logger = set_up_logger("npols2tbl.{}".format(nbits))
-    cmd = RAWSPECTEST_DIR \
-            + "rawspectest {} 2> ".format(nbits) \
+    cmd = "rawspectest {} 2> ".format(nbits) \
             + RST_STDERR \
             + " 1> " + RST_STDOUT
     run_cmd(cmd, logger)
