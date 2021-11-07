@@ -100,7 +100,8 @@ def main(args=None):
     # Bye-bye.
     if n_errors > 0:
         logger.fatal("*FAILURE* - Number of errors reported = {}".format(n_errors))
-    logger.info("*SUCCESS* - No errors reported.")
+    else:
+        logger.info("*SUCCESS* - No errors reported.")
 
 
 if __name__ == "__main__":
