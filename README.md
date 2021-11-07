@@ -61,7 +61,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * ```bash xprep.sh```
 * ```bash xtest.sh  <GPU_ID>```
 
-## 4.0 Bash Script Overviews
+## 4.0 Bash Script Design Overviews
 
 ### 4.1 xinstall.sh Overview :: Driver for the installer.py Python Script
 
@@ -90,7 +90,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Generate trial results: ```python3 runner.py -g <GPU ID>```.
 * Compare trial results to that of the baseline: ```python3 reviewer.py```.
 
-## 5.0 Python Script Overviews
+## 5.0 Python Script Design Overviews
 
 ### 5.1 installer.py
 
