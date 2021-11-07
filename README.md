@@ -71,7 +71,6 @@ TBD
 
 ### 5.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
 
-* `set -e` so that if anything goes wrong, immediately exit.
 * Fix the CUDA_PATH environment variable: ```export CUDA_PATH=/usr/local/cuda```.
 * Validate URL and BRANCH.
 * Go $HOME.
@@ -82,7 +81,6 @@ TBD
 
 ### 5.3 xtest.sh Overview :: Run Tests and Evaluate Results
 
-* `set -e` so that if anything goes wrong, immediately exit.
 * Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
 * Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
 * Go to $HOME/rawspec_testing/exec
@@ -93,11 +91,19 @@ TBD
 
 ### 6.1 installer.py
 
-TBD
+* Print out system information and prompt the operator whether or not to continue (yes/no).
+* Assume continuing.  Purge everything under the existing baseline directory.
+* Create the rawspectest baseline table.
+* Copy over selected baseline .raw files from sources provided by Matt Lebofsky.
+* Run rawspec on all the file stems.
+* For each .fil file produced, run turboSETI.
+* For each .h5 file either produced by rawspec directly or indirectly by turboSETI, run hdr2tbl.main producing a .tblhdr file.
+* For each .dat file produced by turboSETI, run dat2tbl.main producing a .tbldat file.
+* ```rm *.dat *.fil *.h5 *.log```.
 
 ### 6.2 runner.py
 
-The ```runner.py``` script builds a testing trial directory at ```/datax/scratch/rawspec_testing_trial/```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).
+The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
 
 ### 6.3 reviewer.py
 
