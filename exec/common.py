@@ -53,7 +53,7 @@ def oops(msg):
     sys.exit(86)
 
 
-def run_cmd(cmd, logger):
+def run_cmd(cmd, logger, stderr=None):
     """
     Run an operating system command.
 
@@ -73,6 +73,8 @@ def run_cmd(cmd, logger):
     try:
         exit_status = os.system(cmd)
         if exit_status != 0:
+            if stderr is not None:
+                logger.error("Look at stderr file {} !!".format(stderr))
             oops("os.system({}) FAILED, returned exit status {} !!"
                  .format(cmd, exit_status))
     except Exception as exc:

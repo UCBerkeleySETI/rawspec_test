@@ -29,7 +29,7 @@ def do_nbits(wfh, nbits):
     cmd = "rawspectest {} 2> ".format(nbits) \
             + RST_STDERR \
             + " 1> " + RST_STDOUT
-    run_cmd(cmd, logger)
+    run_cmd(cmd, logger, RST_STDERR)
 
     logger.info("Checking stderr (should be nil) ...")
     file_size = os.path.getsize(RST_STDERR)
