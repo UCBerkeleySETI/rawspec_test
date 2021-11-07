@@ -41,20 +41,21 @@ fi
 
 # Make the baseline github copy of rawspec
 echo 2>&1 | tee -a $LOG
-cd rawspec echo 2>&1 | tee -a $LOG
-make echo 2>&1 | tee -a $LOG
+cd rawspec
+echo 'Will make rawspec here: '`pwd` 2>&1 | tee -a $LOG
+make 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
     oops 'make FAILED'
 fi
 
 # Run the installer script.
-echo echo 2>&1 | tee -a $LOG
-cd $HERE echo 2>&1 | tee -a $LOG
-python3 installer.py $PYOPTS echo 2>&1 | tee -a $LOG
+echo 2>&1 | tee -a $LOG
+cd $HERE
+echo 'Will run installer.py here: '`pwd` 2>&1 | tee -a $LOG
+python3 installer.py $PYOPTS 2>&1 | tee -a $LOG
 
 echo 2>&1 | tee -a $LOG
 echo ======== 2>&1 | tee -a $LOG
 echo FINISHED 2>&1 | tee -a $LOG
 echo ======== 2>&1 | tee -a $LOG
 echo There is a log of this session in $LOG
-
