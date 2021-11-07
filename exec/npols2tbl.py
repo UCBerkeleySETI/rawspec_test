@@ -109,21 +109,11 @@ def main(args=None):
         os.system("python3 {} -h".format(__file__))
         sys.exit(86)
 
-    # Set up directory for the intermediate files.
-    try:
-        shutil.rmtree(RAWSPECTEST_DIR, ignore_errors=True)
-        os.mkdir(RAWSPECTEST_DIR)
-    except:
-        oops("os.mkdir({}) FAILED".format(RAWSPECTEST_DIR))
-
     # Generate cases for 8- and 16-bit spectra elements.
     with open(args.tblfile, "w") as wfh:
         wfh.write("nbits,product,chan,npols,value1,value2,value3,value4\n")
         do_nbits(wfh, 8)
         do_nbits(wfh, 16)
-
-    # Clean up intermediate file directory.
-    shutil.rmtree(RAWSPECTEST_DIR, ignore_errors=True)
 
 
 if __name__ == "__main__":
