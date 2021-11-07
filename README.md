@@ -2,27 +2,23 @@
 
 The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
 
-### Test Baseline Installation
+## 1.0 Testing Baseline Overview
 
 The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing_baseline/``` and consists of the following:
 * .raw files provided by Matt Lebofsky
-* 2 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession, representing baseline results that will be used for validating future ```rawspec``` runs. 
+* 2 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession. 
+* 1 table file produced in a rawspectest session.
 
 The intermediate *.fil file produced by ```rawspec``` and the intermediate *.h5, *.dat, and *.log files produced by ```turbo_seti``` have been discarded. 
  
-The table files are of the following types:
+The table files are as follows:
 * ```*.tbldat``` top_hit_id, drift_rate, snr,frequency, and total_num_hits values extracted from the corresponding ```turbo_seti``` .dat file.
 * ```*.tblhdr``` Filterbank header fields with the number of integrations added.
+* ```rawspectest.tblnpols``` Output from a rawspectest session with ```nbits``` values of 8 and 16
 
-Both table file types are implemented as CSV files.
+All table file types are implemented as CSV files.
 
-
-In theory, the installation only needs to be done once (famous last words?).  Of course, more test .raw files can be incorporated in the future to expand the testing scope.  Precisely how to add to the existing .raw file set and generate the new test table files is TBD (but not difficult).
-
-As of 2021-11-06, this step was completed with the following script execution:
-```python3 installer.py  -g 3```. 
-
-## Test Baseline Contents
+## 2.0 Testing Baseline Contents
 
 The following files are in the testing baseline directory:
 
@@ -36,9 +32,9 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+rawspectest.tblnpols
 
-
-## Prerequisites to All Activity
+## 3.0 Prerequisites to All Activity
 
 Before doing anything else related to rawspec_testing, follow this procedure.
 
@@ -49,7 +45,9 @@ Before doing anything else related to rawspec_testing, follow this procedure.
      - ```pip  install  -U  --user  blimpy```
      - ```pip  install  -U  --user  turbo_seti```
 
-## Installing the Testing Baseline (caution!)
+## 4.0 Testing Operations
+
+### 4.1 Installing the Testing Baseline (caution!)
 
 IMPORTANT: This procedure is generally unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the test data itself.  Still, consider simpler methods before using this procedure.
 
@@ -57,7 +55,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Go to $HOME/rawspec_testing/exec 
 * ```bash xinstall.sh```
 
-## Testing a New Pull Request
+### 4.2 Testing a New Pull Request
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
@@ -65,7 +63,13 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * ```bash xprep.sh```
 * ```bash xtest.sh  <GPU_ID>```
 
-## xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
+## 5.0 Bash Script Overviews
+
+### 5.1 xinstall.sh Overview :: The Mechanics of Installation
+
+TBD
+
+### 5.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
 
 * `set -e` so that if anything goes wrong, immediately exit.
 * Fix the CUDA_PATH environment variable: ```export CUDA_PATH=/usr/local/cuda```.
@@ -76,7 +80,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * `cd rawspec`
 * `make`
 
-## xtest.sh Overview :: Run Tests and Evaluate Results
+### 5.3 xtest.sh Overview :: Run Tests and Evaluate Results
 
 * `set -e` so that if anything goes wrong, immediately exit.
 * Fix the PATH environment variable: ```export PATH=$HOME/rawspec:$PATH```.
@@ -85,10 +89,16 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Generate trial results: ```python3 runner.py -g <GPU ID>```.
 * Compare trial results to that of the baseline: ```python3 reviewer.py```.
 
-### runner.py
+## 6.0 Python Script Overviews
+
+### 6.1 installer.py
+
+TBD
+
+### 6.2 runner.py
 
 The ```runner.py``` script builds a testing trial directory at ```/datax/scratch/rawspec_testing_trial/```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspec```, ```turbo_seti```, and the testing utility scripts (```dat2tbl.py``` and ```hdr2tbl.py```).
 
-### reviewer.py
+### 6.3 reviewer.py
 
 The ```reviewer.py``` script compares the corresponding table files from the baseline and trial directories.  Successful comparisons are logged as informational messages.  Discrepancies are logged as errors.  Any error found should be investigated as soon as possible.
