@@ -63,6 +63,8 @@ def run_cmd(cmd, logger, stderr=None):
         O/S command to run.
     logger : logging object
         Announce the running command.
+    stderr : str, optional
+        If an error happens, log that there is a stderr file available.
 
     Returns
     -------
