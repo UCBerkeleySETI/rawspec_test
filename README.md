@@ -21,7 +21,7 @@ All table file types are implemented as CSV files.
 ## 2.0 Testing Baseline Contents
 
 The following files are in the testing baseline directory:
-
+```
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw
@@ -33,7 +33,7 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 rawspectest.tblnpols
-
+```
 ## 3.0 Prerequisites to All Activity
 
 Before doing anything else related to rawspec_testing, follow this procedure.
