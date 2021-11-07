@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="./README.css">
 
 # rawspec_testing
 
