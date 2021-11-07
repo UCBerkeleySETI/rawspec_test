@@ -1,13 +1,16 @@
 # Prepare for testing.
 
+HERE=`pwd`
+LOG=${HERE}/`basename $0`.log
+> $LOG # Make the log nil.
+set -e
+
 function oops {
 	echo
-	echo '*** Oops *** '$1' !! ***'
+	echo '*** Oops *** '$1' !! ***' 2>&1 | tee -a $LOG
 	echo
 	exit 86
 }
-
-set -e
 
 HERE=`pwd`
 URL='https://github.com/UCBerkeleySETI/rawspec'
@@ -18,26 +21,40 @@ export CUDA_PATH=/usr/local/cuda
 export PATH=$HOME/rawspec:$PATH
 
 # Install the baseline github copy of rawspec
-echo
+echo 2>&1 | tee -a $LOG
 cd $HOME
 if [ -d rawspec ]; then
-    rm -rf rawspec
+	MSG='Removing old copy of rawspec .....'
+	echo $MSG 2>&1 | tee -a $LOG
+    rm -rf rawspec 2>&1 | tee -a $LOG
+else
+	MSG='No pre-existing copy of rawspec present.'
+	echo $MSG 2>&1 | tee -a $LOG
 fi
+echo 2>&1 | tee -a $LOG
+MSG='git clone from URL '$URL', branch '$BRANCH' .....'
+echo $MSG 2>&1 | tee -a $LOG
 git clone -b $BRANCH $URL
 if [ $? -ne 0 ]; then
     oops 'git clone FAILED'
 fi
 
 # Make the baseline github copy of rawspec
-echo
-cd rawspec
-make
+echo 2>&1 | tee -a $LOG
+cd rawspec echo 2>&1 | tee -a $LOG
+make echo 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
     oops 'make FAILED'
 fi
 
 # Run the installer script.
-echo
-cd $HERE
-python3 installer.py $PYOPTS
+echo echo 2>&1 | tee -a $LOG
+cd $HERE echo 2>&1 | tee -a $LOG
+python3 installer.py $PYOPTS echo 2>&1 | tee -a $LOG
+
+echo 2>&1 | tee -a $LOG
+echo ======== 2>&1 | tee -a $LOG
+echo FINISHED 2>&1 | tee -a $LOG
+echo ======== 2>&1 | tee -a $LOG
+echo There is a log of this session in $LOG
 
