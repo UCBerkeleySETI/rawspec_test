@@ -12,7 +12,7 @@ set -e
 HERE=`pwd`
 URL='https://github.com/UCBerkeleySETI/rawspec'
 BRANCH='master'
-PYOPTS='-U -g 3'
+PYOPTS='-g 3'
 
 export CUDA_PATH=/usr/local/cuda 
 export PATH=$HOME/rawspec:$PATH
@@ -39,6 +39,5 @@ fi
 # Run the installer script.
 echo
 cd $HERE
-pwd
 python3 installer.py $PYOPTS
 
