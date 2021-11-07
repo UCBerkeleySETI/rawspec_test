@@ -4,7 +4,7 @@ import shutil
 from argparse import ArgumentParser
 from common import MY_VERSION, oops, run_cmd, set_up_logger
 
-RAWSPECTEST_DIR = os.environ["HOME"] + "/rawspec_testing/"
+RAWSPECTEST_DIR = os.environ["HOME"] + "/rawspec_testing/exec/"
 RST_STDOUT = RAWSPECTEST_DIR + "stdout.txt"
 RST_STDERR = RAWSPECTEST_DIR + "stderr.txt"
 
