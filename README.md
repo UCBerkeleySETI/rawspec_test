@@ -71,8 +71,6 @@ TBD
 
 ### 5.2 xprep.sh Overview :: Prepare PR Copy of Rawspec for Testing
 
-* Fix the CUDA_PATH environment variable: ```export CUDA_PATH=/usr/local/cuda```.
-* Set the LD_LIBRARY_PATH environment variable: ```export LD_LIBRARY_PATH=$HOME/rawspec```.
 * Validate URL and BRANCH.
 * Go $HOME.
 * If an old rawspec exists under $HOME, purge it.
