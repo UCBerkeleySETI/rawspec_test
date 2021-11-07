@@ -5,6 +5,7 @@ test/common.py
 Common definitions and functions.
 """
 
+import os
 import sys
 import logging
 
@@ -21,6 +22,7 @@ SELECTED = [
 
 BASELINE_DIR = "/mnt_blpd20/scratch/rawspec_testing_baseline/"
 TRIAL_DIR = BASELINE_DIR + "rawspec_testing_trial/"
+RAWSPECTEST_TBL = "rawspectest.tblnpols"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
 TIME_FORMAT = "%H:%M:%S"
@@ -30,7 +32,7 @@ PANDAS_ENGINE = "python"
 
 # Tolerance of the Relative TO Largest (RTOL).
 # This is the maximum allowed difference between two real numbers
-# relative to the larger absolute value. 
+# relative to the larger absolute value.
 # For example, to set a tolerance of 5%, then rel_tol=0.05
 RTOL_VALUE = 0.0005 # 0.05 %
 
@@ -51,6 +53,33 @@ def oops(msg):
     sys.exit(86)
 
 
+def run_cmd(cmd, logger):
+    """
+    Run an operating system command.
+
+    Parameters
+    ----------
+    cmd : str
+        O/S command to run.
+    logger : logging object
+        Announce the running command.
+
+    Returns
+    -------
+    None.
+
+    """
+    logger.info("Running `{}` .....".format(cmd))
+    try:
+        exit_status = os.system(cmd)
+        if exit_status != 0:
+            oops("os.system({}) FAILED, returned exit status {} !!"
+                 .format(cmd, exit_status))
+    except Exception as exc:
+        oops("os.system({}) EXCEPTION {} !!"
+             .format(cmd, exc))
+ 
+
 def set_up_logger(my_name):
     """
     Set up the logger.
@@ -64,11 +93,11 @@ def set_up_logger(my_name):
     -------
     logger : logging object
     """
-    logger = logging.getLogger(name=my_name)
     logging_format = LOGGER_FORMAT
     logging.basicConfig(format=logging_format,
-                        datefmt=TIME_FORMAT)
-    logger.setLevel(logging.INFO)
+                        datefmt=TIME_FORMAT,
+                        level=logging.INFO)
+    logger = logging.getLogger(name=my_name)
     logger.info("Logging set up complete.")
-    
+
     return logger

@@ -19,9 +19,9 @@ import glob
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, TRIAL_DIR, \
+from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, TRIAL_DIR, \
                    oops, set_up_logger
-from compare_2_csvs import compare_tbldat, compare_tblhdr
+from compare_2_csvs import compare_tbldat, compare_tblhdr, compare_tblnpols
 
 
 def main(args=None):
@@ -91,6 +91,11 @@ def main(args=None):
         logger.info(basename)
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tblhdr(baseline_file, trial_file)
+
+    # Compare trial to baseline versions o0f rawspectest .tblnpols files.
+    baseline = BASELINE_DIR + RAWSPECTEST_TBL
+    trial = TRIAL_DIR + RAWSPECTEST_TBL
+    n_errors += compare_tblnpols(baseline, trial)
 
     # Bye-bye.
     if n_errors > 0:

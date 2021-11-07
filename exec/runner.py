@@ -28,10 +28,11 @@ import logging
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, \
-                   TRIAL_DIR, TS_SNR_THRESHOLD, oops, set_up_logger
+from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, \
+                   TRIAL_DIR, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
 import dat2tbl
 import hdr2tbl
+import npols2tbl
 
 
 def main(args=None):
@@ -129,25 +130,13 @@ def main(args=None):
         rawstem = one_raw_file[0:-9]
         cmd = "rawspec  -f 1048576  -t 51  -g {}  -d {}  {}" \
               .format(args.gpu_id, TRIAL_DIR, rawstem)
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            exit_status = os.system(cmd)
-            if exit_status != 0:
-                oops("os.system({}) returned exit status {} !!".format(cmd, exit_status))
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        run_cmd(cmd, logger)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
         cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
               .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            exit_status = os.system(cmd)
-            if exit_status != 0:
-                oops("os.system({}) returned exit status {} !!".format(cmd, exit_status))
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        run_cmd(cmd, logger)
         dat_name = filfile.split('/')[-1].replace(".fil", ".dat")
         tbldat_name = filfile.split('/')[-1].replace(".fil", '.tbldat')
         try:
@@ -162,18 +151,16 @@ def main(args=None):
             oops("hdr2tbl.main({}, {}) FAILED !!".format(h5_name, tblhdr_name))
     logger.info("Created post-turbo_seti tables.")
 
+    # rawspectest cases.
+    tblnpols_name = TRIAL_DIR + RAWSPECTEST_TBL
+    npols2tbl.main([tblnpols_name])
+
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
         logger.info("Skipping post-run cleanup at the operator's request")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            exit_status = os.system(cmd)
-            if exit_status != 0:
-                oops("os.system({}) returned exit status {} !!".format(cmd, exit_status))
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        run_cmd(cmd, logger)
 
     # Bye-bye.
     time2 = time.time()

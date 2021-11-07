@@ -23,7 +23,6 @@ MY_NAME = "installer"
 
 import sys
 import os
-import stat
 import glob
 import shutil
 import time
@@ -31,10 +30,11 @@ from datetime import timedelta
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, \
-                   SELECTED, TS_SNR_THRESHOLD, oops, set_up_logger
+from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, \
+                   SELECTED, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
 import dat2tbl
 import hdr2tbl
+import npols2tbl
 
 
 def main(args=None):
@@ -73,6 +73,11 @@ def main(args=None):
                         default=False,
                         action="store_true",
                         help="Flag: Skip cleanup at end?  Large files are left in baseline.")
+    parser.add_argument("-U", "--rawspectest_only",
+                        dest="flag_rawspectest_only",
+                        default=False,
+                        action="store_true",
+                        help="Flag: Install rawspectest .tblnpols file only i.e. skip everything else?")
     parser.add_argument("-v", "--version",
                         dest="show_version",
                         default=False,
@@ -94,6 +99,13 @@ def main(args=None):
 
     # Take a timestamp
     time1 = time.time()
+
+    # rawspectest cases.
+    tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
+    npols2tbl.main([tblnpols_name])
+    if args.flag_rawspectest_only:
+        logger.info("Only installed the rawspectest .tblpols file at the operator's request")
+        sys.exit(0)
 
     # Skip initialisation?
     if args.flag_skip_init:
@@ -119,13 +131,10 @@ def main(args=None):
         # BASELINE_DIR exists?
         if not os.path.exists(BASELINE_DIR): # No, it does not.
             oops("Baseline {} does not exist !!".format(BASELINE_DIR))
-            
+
         # Remove old artifacts.
-        try:
-            cmd = "rm -rf {}/*".format(BASELINE_DIR)
-            os.system(cmd)
-        except:
-            oops("FAILED: {}".format(cmd))
+        cmd = "rm -rf {}/*".format(BASELINE_DIR)
+        run_cmd(cmd, logger)
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
@@ -151,23 +160,14 @@ def main(args=None):
     # For each unique file stem, run rawspec.
     for path_prefix in SELECTED:
         rawstem = os.path.basename(path_prefix)
-        cmd = "rawspec  -f 1048576  -t 51  -g {}  {}" \
-              .format(args.gpu_id, rawstem)
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            os.system(cmd)
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        cmd = "rawspec  -f 1048576  -t 51  -g {}  {}".format(args.gpu_id, rawstem)
+        run_cmd(cmd, logger)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
         cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
               .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            os.system(cmd)
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        run_cmd(cmd, logger)
         dat_name = filfile.split('/')[-1].replace(".fil", ".dat")
         tbldat_name = filfile.split('/')[-1].replace(".fil", '.tbldat')
         try:
@@ -187,11 +187,7 @@ def main(args=None):
         logger.info("Skipping post-run cleanup at the operator's request")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
-        try:
-            logger.info("Running `{}` .....".format(cmd))
-            os.system(cmd)
-        except:
-            oops("os.system({}) FAILED !!".format(cmd))
+        run_cmd(cmd, logger)
 
     # Bye-bye.
     time2 = time.time()

@@ -14,7 +14,7 @@ import h5py
 from astropy.coordinates import Angle
 
 # Helpers:
-from common import MY_VERSION, set_up_logger
+from common import MY_VERSION, run_cmd, set_up_logger
 
 
 def read_header(h5):
@@ -61,6 +61,9 @@ def main(args=None):
 
     """
 
+    # Set up logging.
+    logger = set_up_logger(MY_NAME)
+
     # Create an option parser to get command-line input/arguments
     parser = ArgumentParser(description="hdr2tbl version {}."
                                         .format(MY_VERSION))
@@ -89,9 +92,6 @@ def main(args=None):
     if not os.path.exists(args.h5file):
         print("\nInput file {} does not exist!\n".format(args.h5file))
         sys.exit(86)
-
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
 
     # Open .h5 file for reading.
     h5 = h5py.File(args.h5file, mode="r")
