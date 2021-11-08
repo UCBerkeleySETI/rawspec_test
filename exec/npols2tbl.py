@@ -115,6 +115,9 @@ def main(args=None):
         do_nbits(wfh, 8)
         do_nbits(wfh, 16)
 
+    logger = set_up_logger("npols2tbl")
+    logger.info("Saved {}".format(args.tblfile))
+
 
 if __name__ == "__main__":
     main()
