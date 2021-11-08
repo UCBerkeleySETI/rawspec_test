@@ -24,31 +24,23 @@ gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o fileiotest.o fileiotest.c
 nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
 
 Will run installer.py here: /home/texadactyl/rawspec_testing/exec
-08:54:42  installer  INFO  Logging set up complete.
-08:54:42  installer  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
-08:54:42  installer  INFO  Node name = blpc2, CPU type = x86_64, HOME = /home/texadactyl
-08:54:42  installer  INFO  installer: This utility script is about to initialise the rawspec test baseline.
-08:54:42  installer  INFO  installer: Baseline directory will be /mnt_blpd20/scratch/rawspec_testing_baseline/.
-08:54:42  installer  INFO  installer: The first step is to remove old artifacts if they exist.
+05:03:52  installer  INFO  Logging set up complete.
+05:03:52  installer  INFO  O/S name = Linux, release = 4.15.0-72-generic, version = #81~16.04.1-Ubuntu SMP Tue Nov 26 16:34:21 UTC 2019
+05:03:52  installer  INFO  Node name = blpc2, CPU type = x86_64, HOME = /home/texadactyl
+05:03:52  installer  INFO  installer: This utility script is about to initialise the rawspec test baseline.
+05:03:52  installer  INFO  installer: Baseline directory will be /mnt_blpd20/scratch/rawspec_testing_baseline/.
+05:03:52  installer  INFO  installer: The first step is to remove old artifacts if they exist.
 
-installer: Okay to proceed? (yes/[anything else]: 08:54:49  installer  INFO  Running `rm -rf /mnt_blpd20/scratch/rawspec_testing_baseline//*` .....
-08:55:31  npols2tbl.8  INFO  Logging set up complete.
-08:55:31  npols2tbl.8  INFO  Running `rawspectest 8 2> /home/texadactyl/rawspectest_testing/stderr.txt 1> /home/texadactyl/rawspectest_testing/stdout.txt` .....
-08:55:33  npols2tbl.8  INFO  Checking stderr (should be nil) ...
-08:55:33  npols2tbl.8  INFO  Checking stdout (should not be nil) ...
-08:55:33  npols2tbl.16  INFO  Logging set up complete.
-08:55:33  npols2tbl.16  INFO  Running `rawspectest 16 2> /home/texadactyl/rawspectest_testing/stderr.txt 1> /home/texadactyl/rawspectest_testing/stdout.txt` .....
-08:55:35  npols2tbl.16  INFO  Checking stderr (should be nil) ...
-08:55:35  npols2tbl.16  INFO  Checking stdout (should not be nil) ...
-08:55:35  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw .....
-08:56:21  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw .....
-08:57:16  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw .....
-08:58:01  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw .....
-08:58:59  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw .....
-08:59:59  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw .....
-09:00:41  installer  INFO  Copied 6 files.
-09:00:41  installer  INFO  Current directory is now /mnt_blpd20/scratch/rawspec_testing_baseline/
-09:00:41  installer  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  blc13_guppi_57991_49836_DIAG_FRB121102_0010` .....
+installer: Okay to proceed? (yes/[anything else]: 05:03:58  installer  INFO  Running `rm -rf /mnt_blpd20/scratch/rawspec_testing_baseline//*` .....
+05:04:05  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw .....
+05:05:22  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw .....
+05:06:09  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP13/blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw .....
+05:06:49  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0000.raw .....
+05:07:39  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw .....
+05:08:31  installer  INFO  Copying /mnt_blpd5/datax/FRB121102/BLP17/blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw .....
+05:09:09  installer  INFO  Copied 6 files.
+05:09:09  installer  INFO  Current directory is now /mnt_blpd20/scratch/rawspec_testing_baseline/
+05:09:09  installer  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  blc13_guppi_57991_49836_DIAG_FRB121102_0010` .....
 using requested GPU: 3
 rawspec using librawspec 2.5.0+5@g7c0bf4f cuFFT 10.2.1.245
 working stem: blc13_guppi_57991_49836_DIAG_FRB121102_0010
@@ -57,7 +49,7 @@ opening file: blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
 opening file: blc13_guppi_57991_49836_DIAG_FRB121102_0010.0002.raw
 opening file: blc13_guppi_57991_49836_DIAG_FRB121102_0010.0003.raw [No such file or directory]
 output product 0: 3 spectra
-09:02:40  installer  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008` .....
+05:10:58  installer  INFO  Running `rawspec  -f 1048576  -t 51  -g 3  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008` .....
 using requested GPU: 3
 rawspec using librawspec 2.5.0+5@g7c0bf4f cuFFT 10.2.1.245
 working stem: blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008
@@ -66,7 +58,7 @@ opening file: blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0001.raw
 opening file: blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0002.raw
 opening file: blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.0003.raw [No such file or directory]
 output product 0: 3 spectra
-09:04:39  installer  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil` .....
+05:12:45  installer  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.fil` .....
 numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 numexpr.utils   INFO     NumExpr defaulting to 8 threads.
 
@@ -90,13 +82,13 @@ find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [4131520.75 4992
 find_doppler.16 INFO     Top hit found! SNR 15.514752, Drift Rate -0.102043, index 806204
 find_doppler.16 INFO     Top hit found! SNR 12.034038, Drift Rate 0.867362, index 941967
 find_doppler.61 INFO     Top hit found! SNR 52.519356, Drift Rate -0.102043, index 90645
-Search time:  2.93 min
-09:07:44  dat2tbl  INFO  Logging set up complete.
-09:07:44  dat2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
-09:07:44  hdr2tbl  INFO  Logging set up complete.
-09:07:44  hdr2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
-09:07:44  installer  INFO  Created post-turbo_seti tables.
-09:07:44  installer  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil` .....
+Search time:  1.88 min
+05:14:49  dat2tbl  INFO  Logging set up complete.
+05:14:49  dat2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tbldat
+05:14:49  hdr2tbl  INFO  Logging set up complete.
+05:14:49  hdr2tbl  INFO  Saved blc13_guppi_57991_49836_DIAG_FRB121102_0010.rawspec.0000.tblhdr
+05:14:49  installer  INFO  Created post-turbo_seti tables.
+05:14:49  installer  INFO  Running `turboSETI  --snr 10  --gpu y  --gpu_id 3  --n_coarse_chan 64  blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.fil` .....
 numexpr.utils   INFO     Note: NumExpr detected 40 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
 numexpr.utils   INFO     NumExpr defaulting to 8 threads.
 
@@ -118,14 +110,24 @@ find_doppler.0  INFO     Spectra 3x3 postage stamp (0, 0, 0:3): [800914.25 83037
 find_doppler.0  INFO     ::::::::::::::::::::::::: (1, 0, 0:3): [808807.4375 924503.25   908501.8125]
 find_doppler.0  INFO     ::::::::::::::::::::::::: (2, 0, 0:3): [ 704653.5    1001697.8125 1070757.875 ]
 find_doppler.60 INFO     Top hit found! SNR 11.463472, Drift Rate -0.255106, index 441634
-Search time:  1.57 min
-09:09:22  dat2tbl  INFO  Logging set up complete.
-09:09:22  dat2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
-09:09:22  hdr2tbl  INFO  Logging set up complete.
-09:09:22  hdr2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
-09:09:22  installer  INFO  Created post-turbo_seti tables.
-09:09:22  installer  INFO  Running `rm *.dat *.fil *.h5 *.log` .....
-09:09:23  installer  INFO  End, elapsed hh:mm:ss = 0:14:41.384202
+Search time:  1.24 min
+05:16:07  dat2tbl  INFO  Logging set up complete.
+05:16:07  dat2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldat
+05:16:07  hdr2tbl  INFO  Logging set up complete.
+05:16:07  hdr2tbl  INFO  Saved blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
+05:16:07  installer  INFO  Created post-turbo_seti tables.
+05:16:07  npols2tbl.8  INFO  Logging set up complete.
+05:16:07  npols2tbl.8  INFO  Running `rawspectest 8 2> /home/texadactyl/rawspec_testing/exec/stderr.txt 1> /home/texadactyl/rawspec_testing/exec/stdout.txt` .....
+05:16:09  npols2tbl.8  INFO  Checking stderr (should be nil) ...
+05:16:09  npols2tbl.8  INFO  Checking stdout (should not be nil) ...
+05:16:09  npols2tbl.16  INFO  Logging set up complete.
+05:16:09  npols2tbl.16  INFO  Running `rawspectest 16 2> /home/texadactyl/rawspec_testing/exec/stderr.txt 1> /home/texadactyl/rawspec_testing/exec/stdout.txt` .....
+05:16:12  npols2tbl.16  INFO  Checking stderr (should be nil) ...
+05:16:12  npols2tbl.16  INFO  Checking stdout (should not be nil) ...
+05:16:12  npols2tbl  INFO  Logging set up complete.
+05:16:12  npols2tbl  INFO  Saved rawspectest.tblnpols
+05:16:12  installer  INFO  Running `rm *.dat *.fil *.h5 *.log` .....
+05:16:12  installer  INFO  End, elapsed hh:mm:ss = 0:12:20.327895
 
 ========
 FINISHED
