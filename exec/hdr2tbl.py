@@ -1,6 +1,6 @@
-r"""
+"""
 Package rawspec, testing functions
-test/hdr2tbl.py
+hdr2tbl.py
 
 Generate a table based on a turbo_seti .h5 file header, using selected fields.
 """
@@ -14,7 +14,7 @@ import h5py
 from astropy.coordinates import Angle
 
 # Helpers:
-from common import MY_VERSION, run_cmd, set_up_logger
+from common import MY_VERSION, set_up_logger
 
 
 def read_header(h5):
@@ -106,7 +106,7 @@ def main(args=None):
         for key in header.keys():
             csvfile.write("{},{}\n".format(key, header[key]))
 
-    logger.info("Saved {}".format(args.tblfile))
+    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":

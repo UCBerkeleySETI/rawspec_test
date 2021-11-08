@@ -1,6 +1,6 @@
 r"""
 Package rawspec, testing functions
-test/dat2tbl.py
+dat2tbl.py
 
 Generate a table based on a turbo_seti .dat file, using selected columns.
 """
@@ -75,7 +75,7 @@ def main(args=None):
 
     # Save DataFrame to the output CSV file.
     df.to_csv(args.tblfile, header=True, index=False)
-    logger.info("Saved {}".format(args.tblfile))
+    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,11 @@
+"""
+Package rawspec, testing functions
+npols2tbl.py
+
+Generate a table based on rawspectest output.
+"""
 import os
 import sys
-import shutil
 from argparse import ArgumentParser
 from common import MY_VERSION, oops, run_cmd, set_up_logger
 
@@ -116,7 +121,7 @@ def main(args=None):
         do_nbits(wfh, 16)
 
     logger = set_up_logger("npols2tbl")
-    logger.info("Saved {}".format(args.tblfile))
+    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":
