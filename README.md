@@ -4,7 +4,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 ## 1.0 Testing Baseline Overview
 
-The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing_baseline/``` and consists of the following:
+The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing/baseline/``` and consists of the following:
 * .raw files provided by @mattlebofsky (Matt Lebofsky)
 * 2 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession. 
 * 1 table file produced in a rawspectest session.
@@ -106,7 +106,7 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 
 ### 5.2 runner.py
 
-The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing_baseline/rawspec_testing_trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti```, and the testing utility scripts (```npols2tbl.py```, ```dat2tbl.py```, and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
+The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing/trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti```, and the testing utility scripts (```npols2tbl.py```, ```dat2tbl.py```, and ```hdr2tbl.py```).  There are a lot of similarities between ```runner.py``` and ```installer.py```.
 
 ### 5.3 reviewer.py
 
