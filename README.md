@@ -57,9 +57,9 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
-*  Edit the ```xprep.sh``` script to supply the PR's URL and BRANCH values.
-* ```bash xprep.sh```
-* ```bash xtest.sh  <GPU_ID>```
+*  Edit the ```xprep.sh``` script to supply the PR's default branch URL value and the specific BRANCH name value.  The URL string should end in “…./rawspec”.
+* Run ```bash xprep.sh```.
+* Run ```bash xtest.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ## 4.0 Bash Script Design Overviews
 
