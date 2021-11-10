@@ -3,14 +3,14 @@ Package rawspec, testing functions
 test/installer.py
 Creates/recreates the rawspec testing baseline.
 
-* If an old version of the baseline directory is present, remove it.
-* Create baseline directory.
+* If an old version of the baseline artifacts are present, remove them.
 * Copy over selected .raw files
     from one of the source directories
     to the baseline directory.
 * For each .raw file in the baseline directory, do the following:
     - rawspec   -f 1048576   -t 51   <.raw file prefix>
 * For each .fil file in the baseline directory produced by rawspec, do the following:
+    - peek <0000.fil file> > <peeked file>
     - turboSETI   -n 64   -s 10   -g y   -d <GPU_ID>   <0000.fil file>
     - python3   dat2tbl.py     <.dat file>   <.tbldat file>
     - python3   installer.py   <.h5 file>    <.tblhdr file>
