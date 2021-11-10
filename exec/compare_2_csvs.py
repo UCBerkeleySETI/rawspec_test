@@ -58,7 +58,7 @@ def compare_lists(col_name, df_b, df_t, flag_isclose=False, rtol_value=0):
                              .format(ii, col_name, b_list[ii], t_item, rtol_value))
         else: # Not real-number scalars; straight comparison works.
             if t_item == b_list[ii]:
-                logger.info("Row {} for {} ok".format(ii, col_name))
+                logger.debug("Row {} for {} ok".format(ii, col_name))
             else:
                 n_complaints += 1
                 logger.error("Row {} baseline {}={} but trial value={}"
