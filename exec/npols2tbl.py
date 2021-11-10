@@ -36,14 +36,6 @@ def do_nbits(wfh, nbits):
             + " 1> " + RST_STDOUT
     run_cmd(cmd, logger, RST_STDERR)
 
-    logger.info("Checking stderr (should be nil) ...")
-    file_size = os.path.getsize(RST_STDERR)
-    if file_size > 0:
-        with open(RST_STDERR, "r") as rfh:
-            content = rfh.read()
-            print(content)
-        oops("rawspectest FAILED")
-
     logger.info("Checking stdout (should not be nil) ...")
     file_size = os.path.getsize(RST_STDOUT)
     if file_size < 1:
