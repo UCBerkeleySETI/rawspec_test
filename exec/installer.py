@@ -153,6 +153,10 @@ def main(args=None):
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
+        peekfile = filfile.split("/")[-1].replace(".fil", ".peeked")
+        cmd = "peek  {} 2>&1 > {}" \
+              .format(filfile, peekfile)
+        run_cmd(cmd, logger)
         cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
               .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
         run_cmd(cmd, logger)
