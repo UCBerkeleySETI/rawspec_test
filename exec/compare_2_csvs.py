@@ -51,7 +51,7 @@ def compare_lists(col_name, df_b, df_t, flag_isclose=False, rtol_value=0):
             # NOTE that numpy.isclose() assumes that the 2nd parameter is the reference value.
             # Ref:  https://numpy.org/doc/stable/reference/generated/numpy.isclose.html?highlight=isclose#numpy.isclose
             if np.isclose(float(t_item), float(b_list[ii]), rtol=rtol_value):
-                logger.info("Row {} for {} ok".format(ii, col_name))
+                logger.debug("Row {} for {} ok".format(ii, col_name))
             else:
                 n_complaints += 1
                 logger.error("Row {} baseline {}={} but trial value={}, using rtol={}"
