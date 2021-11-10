@@ -117,7 +117,8 @@ def main(args=None):
     # Generate cases for 8- and 16-bit spectra elements.
     with open(args.tblfile, "w") as wfh:
         wfh.write("nbits,product,chan,npols,value1,value2,value3,value4\n")
-        do_nbits(wfh, 8)
+        do_nbits(wfh,  4)
+        do_nbits(wfh,  8)
         do_nbits(wfh, 16)
 
     logger = set_up_logger("npols2tbl")
