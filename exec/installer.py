@@ -3,8 +3,6 @@ Package rawspec, testing functions
 test/installer.py
 Creates/recreates the rawspec testing baseline.
 
-IMPORTANT: Runs only on BL compute node blpc0.
-
 * If an old version of the baseline directory is present, remove it.
 * Create baseline directory.
 * Copy over selected .raw files
