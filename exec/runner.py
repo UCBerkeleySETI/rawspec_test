@@ -1,8 +1,5 @@
 """
-Package rawspec, testing functions
-test/runner.py
-
-IMPORTANT: Runs only on BL compute node blpc0.
+Package rawspec_testing
 
 * Create <trial directory> tree under /tmp.
 * cd <trial diretcory>
@@ -10,8 +7,9 @@ IMPORTANT: Runs only on BL compute node blpc0.
     - rawspec   -f 1048576   -t 51  --dest .   <full path of the .raw file prefix>
 * For each ext = .fil or .h5 file in the <trial directory> produced by rawspec, do the following:
     - turboSETI   -n 64   -s 10   -g y   -d <GPU_ID>   <0000.ext file>
-    - python3   dat2tbl.py   <.dat file>   <.tbldat file>
-    - python3   installer.py   <.h5 file>   <.tblhdr file>
+    - <.dat file> --> <.tbldat file>
+    - <.h5 file> -->  <.tblhdr file>
+* rawspectest stdout --> <.tblnpols file>
 * Cleanup: rm *.fil, *.h5, *.dat, *.log
 """
 
