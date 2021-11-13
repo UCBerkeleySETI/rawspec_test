@@ -8,7 +8,7 @@ import os
 import sys
 import logging
 
-MY_VERSION = "1.0"
+MY_VERSION = "1.1"
 TS_SNR_THRESHOLD = 10
 
 SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"

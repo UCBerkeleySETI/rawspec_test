@@ -70,18 +70,16 @@ def main(args=None):
     # Define data postage stamps.
     nw = wf.data[0, 0, 0:3]
     ne = wf.data[0, 0, -4:-1]
-    sw = wf.data[wf.n_ints_in_file, 0, 0:3]
-    se = wf.data[wf.n_ints_in_file, 0, -4:-1]
-    centre_row = wf.n_ints_in_file / 2
-    centre_col = wf.n_channels_in_file / 2
+    sw = wf.data[wf.n_ints_in_file - 1, 0, 0:3]
+    se = wf.data[wf.n_ints_in_file - 1, 0, -4:-1]
+    centre_row = wf.n_ints_in_file // 2
+    centre_col = wf.n_channels_in_file // 2
     bullseye = wf.data[centre_row, 0, centre_col - 1 : centre_col + 2]
 
     # Create the output CSV file.
     with open(args.tblfile, "w") as csvfile:
         csvfile.write("{},{},{},{}\n"
                       .format("label", "value1", "value2", "value3"))
-        csvfile.write("shape,{},{},{}\n"
-                      .format(wf.n_ints_in_file, wf.header["nifs"], wf.n_channels_in_file))
         csvfile.write("NW,{},{},{}\n"
                       .format(nw[0], nw[1], nw[2]))
         csvfile.write("NE,{},{},{}\n"
