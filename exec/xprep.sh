@@ -1,4 +1,5 @@
-# Prepare for testing.
+# Package rawspec_testing
+# Install the rawspec repository that is to be tested.
 # Prerequisite: xinstall.sh (caution!)
 
 URL='DUMMY'
