@@ -19,7 +19,7 @@ from argparse import ArgumentParser
 # Helper functions:
 from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, TRIAL_DIR, \
                    oops, set_up_logger
-from compare_2_csvs import compare_tbldat, compare_tblhdr, compare_tblnpols
+from compare_2_csvs import compare_tbldat, compare_tblhdr, compare_tblnpols, compare_tbldsel
 
 
 def main(args=None):
@@ -89,6 +89,14 @@ def main(args=None):
         logger.info(basename)
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tblhdr(baseline_file, trial_file)
+
+    # For each unique .tbldsel file in BASELINE_DIR,
+    # compare it to its counterpart in TRIAL_DIR.
+    for baseline_file in sorted(glob.glob("{}/*.tbldsel".format(BASELINE_DIR))):
+        basename = os.path.basename(baseline_file)
+        logger.info(basename)
+        trial_file = os.path.join(TRIAL_DIR, basename)
+        n_errors += compare_tbldsel(baseline_file, trial_file)
 
     # Compare trial to baseline versions o0f rawspectest .tblnpols files.
     baseline = BASELINE_DIR + RAWSPECTEST_TBL

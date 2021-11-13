@@ -33,6 +33,7 @@ from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, \
 import dat2tbl
 import hdr2tbl
 import npols2tbl
+import dsel2tbl
 
 
 def main(args=None):
@@ -170,7 +171,13 @@ def main(args=None):
             hdr2tbl.main([h5_name, tblhdr_name])
         except:
             oops("hdr2tbl.main({}, {}) FAILED !!".format(h5_name, tblhdr_name))
-        logger.info("Created post-turbo_seti tables.")
+        tbldsel_name = filfile.split('/')[-1].replace(".fil", ".tbldsel")
+        try:
+            dsel2tbl.main([h5_name, tbldsel_name])
+        except:
+            oops("dsel2tbl.main({}, {}) FAILED !!".format(h5_name, tbldsel_name))
+
+        logger.info("Created post-turbo_seti tables for {}.".format(filfile))
 
     # Create rawspectest baseline table.
     tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL

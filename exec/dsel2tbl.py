@@ -80,8 +80,6 @@ def main(args=None):
     with open(args.tblfile, "w") as csvfile:
         csvfile.write("{},{},{},{}\n"
                       .format("label", "value1", "value2", "value3"))
-        csvfile.write("shape,{},{},{}\n"
-                      .format(wf.n_ints_in_file, wf.header["nifs"], wf.n_channels_in_file))
         csvfile.write("NW,{},{},{}\n"
                       .format(nw[0], nw[1], nw[2]))
         csvfile.write("NE,{},{},{}\n"

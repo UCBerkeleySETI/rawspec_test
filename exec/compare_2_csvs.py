@@ -112,6 +112,51 @@ def compare_tbldat(baseline, trial):
     return n_complaints
 
 
+def compare_tbldsel(baseline, trial):
+    """
+    Compare 2 .tbldsel files.
+
+    Parameters
+    ----------
+    baseline : Pandas Dataframe
+        Baseline.
+    trial : Pandas Dataframe
+        Trial.
+
+    Returns
+    -------
+    int
+        Number of error complaints generated.
+    """
+
+    global logger
+    logger = set_up_logger("compare_tbldat")
+    n_complaints = 0
+
+    # Load both Dataframes.
+    df_b = pd.read_csv(baseline)
+    df_t = pd.read_csv(trial)
+
+    # Make sure they have the same number of rows.
+    nrows_b = len(df_b)
+    nrows_t = len(df_t)
+    if DEBUGGING:
+        print("DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
+    if nrows_t != nrows_b:
+        logger.error("Baseline has {} rows but trial has {} rows"
+                     .format(nrows_b, nrows_t))
+        return 1
+
+    # Check all the columns.
+    n_complaints += compare_lists("label", df_b, df_t)
+    n_complaints += compare_lists("value1", df_b, df_t, True, RTOL_VALUE)
+    n_complaints += compare_lists("value2", df_b, df_t, True, RTOL_VALUE)
+    n_complaints += compare_lists("value3", df_b, df_t, True, RTOL_VALUE)
+
+    # Return resul to caller.
+    return n_complaints
+
+
 def compare_tblnpols(baseline, trial):
     """
     Compare 2 .tblnpols files.
