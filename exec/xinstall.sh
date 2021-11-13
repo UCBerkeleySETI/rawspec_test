@@ -1,4 +1,5 @@
-# Prepare for testing.
+# Package rawspec_testing
+# Prepare the baseline directory for testing.
 
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
