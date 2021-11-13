@@ -1,6 +1,5 @@
 r"""
-Package rawspec, testing functions
-dat2tbl.py
+Package rawspec_testing
 
 Generate a table based on a turbo_seti .dat file, using selected columns.
 """
