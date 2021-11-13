@@ -1,6 +1,6 @@
 """
-Package rawspec, testing functions
-test/installer.py
+Package rawspec_testing
+
 Creates/recreates the rawspec testing baseline.
 
 * If an old version of the baseline artifacts are present, remove them.
