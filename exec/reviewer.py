@@ -1,13 +1,11 @@
 """
-Package rawspec, testing functions
-test/reviewer.py
-
-IMPORTANT: Runs only on BL compute node blpc0.
+Package rawspec_testing
 
 * cd <trial diretcory>
 * For each .tbldat file in the <trial directory>, do the following:
     - Compare   <.tbldat file> to counterpart in the baseline
     - Compare   <.tblhdr file> to counterpart in the baseline
+    - Compare   <.tblnpols file> to counterpart in the baseline
 * In all cases, report SUCCESS or FAILURE.
 """
 
