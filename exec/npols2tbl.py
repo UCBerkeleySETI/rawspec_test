@@ -1,6 +1,5 @@
 """
-Package rawspec, testing functions
-npols2tbl.py
+Package rawspec_testing
 
 Generate a table based on rawspectest output.
 """
