@@ -1,6 +1,5 @@
 """
-Package rawspec, testing functions
-hdr2tbl.py
+Package rawspec_testing
 
 Generate a table based on a turbo_seti .h5 file header, using selected fields.
 """
