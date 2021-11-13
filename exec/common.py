@@ -1,6 +1,5 @@
 """
-Package rawspec, testing functions
-test/common.py
+Package rawspec_testing
 
 Common definitions and functions.
 """
