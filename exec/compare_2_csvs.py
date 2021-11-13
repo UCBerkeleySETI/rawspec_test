@@ -1,6 +1,5 @@
 """
-Package rawspec, testing functions
-test/compare_2_csvs.py
+Package rawspec_testing
 
 Compare 2 dataframes (baseline and trial), row by row, column by column.
 """
