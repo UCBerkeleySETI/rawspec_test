@@ -9,42 +9,10 @@ MY_NAME = "hdr2tbl"
 import sys
 import os
 from argparse import ArgumentParser
-import h5py
-from astropy.coordinates import Angle
+from blimpy import Waterfall
 
 # Helpers:
 from common import MY_VERSION, set_up_logger
-
-
-def read_header(h5):
-    """
-    Read the .h5 header.  Populate a Python dictionary of key:value pairs.
-
-    Parameters
-    ----------
-    h5 : HDF5 handle
-        This is the open HDF5 file.
-
-    Returns
-    -------
-    header : dict
-        This is the header as a Python dict object.
-
-    """
-
-    header = {}
-
-    for key, val in h5['data'].attrs.items():
-        if isinstance(val, bytes):
-            val = val.decode('ascii')
-        if key == 'src_raj':
-            header[key] = Angle(val, unit='hr')
-        elif key == 'src_dej':
-            header[key] = Angle(val, unit='deg')
-        else:
-            header[key] = val
-
-    return header
 
 
 def main(args=None):
@@ -67,8 +35,8 @@ def main(args=None):
     parser = ArgumentParser(description="hdr2tbl version {}."
                                         .format(MY_VERSION))
 
-    parser.add_argument("h5file", type=str, default="", nargs="?",
-                        help="Path of .h5 file to open for reading")
+    parser.add_argument("fbfile", type=str, default="", nargs="?",
+                        help="Path of .fil or .h5 file to access")
     parser.add_argument("tblfile", type=str, default="", nargs="?",
                         help="Path of .tblhdr file to open for writing")
     parser.add_argument("-v", "--version", dest="show_version", default=False, action="store_true",
@@ -84,26 +52,25 @@ def main(args=None):
         print("hdr2tbl: {}".format(MY_VERSION))
         sys.exit(0)
 
-    if args.h5file == "" or args.tblfile == "":
+    if args.fbfile == "" or args.tblfile == "":
         os.system("python3 {} -h".format(__file__))
         sys.exit(86)
 
-    if not os.path.exists(args.h5file):
-        print("\nInput file {} does not exist!\n".format(args.h5file))
+    if not os.path.exists(args.fbfile):
+        print("\nInput file {} does not exist!\n".format(args.fbfile))
         sys.exit(86)
 
     # Open .h5 file for reading.
-    h5 = h5py.File(args.h5file, mode="r")
+    wf = Waterfall(args.fbfile)
 
     # Extract comparator fields.
-    header = read_header(h5)
-    header["n_ints_in_file"] = h5["data"].shape[0]
+    wf.header["n_ints_in_file"] = wf.n_ints_in_file
 
     # Write header dict object to the output CSV file.
     with open(args.tblfile, "w") as csvfile:
         csvfile.write("{},{}\n".format("key", "value"))
-        for key in header.keys():
-            csvfile.write("{},{}\n".format(key, header[key]))
+        for key in wf.header.keys():
+            csvfile.write("{},{}\n".format(key, wf.header[key]))
 
     logger.info("Saved {}".format(os.path.basename(args.tblfile)))
 
