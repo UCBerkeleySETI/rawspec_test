@@ -130,7 +130,7 @@ def compare_tbldsel(baseline, trial):
     """
 
     global logger
-    logger = set_up_logger("compare_tbldat")
+    logger = set_up_logger("compare_tbldsel")
     n_complaints = 0
 
     # Load both Dataframes.
