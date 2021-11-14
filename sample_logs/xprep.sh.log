@@ -1,10 +1,10 @@
 Removing old copy of rawspec .....
 
-git clone from URL https://github.com/UCBerkeleySETI/rawspec, branch master .....
+git clone trial rawspec from URL https://github.com/UCBerkeleySETI/rawspec, branch master .....
 Cloning into 'rawspec'...
 
-make rawspec .....
-#define RAWSPEC_VERSION 2.5.0+5@g7c0bf4f
+Begin make trial rawspec .....
+#define RAWSPEC_VERSION 2.5.0+7@ge2697c6
 gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec.o rawspec.c
 gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_file.o rawspec_file.c
 gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o rawspec_socket.o rawspec_socket.c
@@ -22,6 +22,7 @@ nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' an
 gcc -ggdb -fPIC -I/usr/local/cuda/include   -c -o fileiotest.o fileiotest.c
 /usr/local/cuda/bin/nvcc -ccbin g++ -m64 -g -Xcompiler=-fPIC -I/usr/local/cuda/samples/common/inc -gencode arch=compute_35,code=sm_35 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_75,code=compute_75 -o fileiotest fileiotest.o librawspec.so -L. -lrawspec
 nvcc warning : The 'compute_35', 'compute_37', 'compute_50', 'sm_35', 'sm_37' and 'sm_50' architectures are deprecated, and may be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+End make trial rawspec.
 
 ========
 FINISHED
