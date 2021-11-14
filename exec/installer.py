@@ -22,7 +22,6 @@ MY_NAME = "installer"
 import sys
 import os
 import glob
-import shutil
 import time
 from datetime import timedelta
 from argparse import ArgumentParser
@@ -130,9 +129,10 @@ def main(args=None):
             for one_file in the_raw_file_list:
                 logger.info("Copying {} .....".format(one_file))
                 try:
-                    shutil.copy2(one_file, BASELINE_DIR)
+                    cmd = "ln -s {}/{}".format(BASELINE_DIR, one_file)
+                    run_cmd(cmd, logger)
                 except:
-                    oops("shutil.copy2({}, {}) FAILED !!".format(one_file, BASELINE_DIR))
+                    oops("{} FAILED".format(cmd))
                 counter += 1
         logger.info("Copied {} files.".format(counter))
 
@@ -142,7 +142,7 @@ def main(args=None):
         os.chdir(BASELINE_DIR)
         logger.info("Current directory is now {}".format(BASELINE_DIR))
     except:
-        oops("os.chdir({}) FAILED !!".format(BASELINE_DIR))
+        oops("os.chdir({}) FAILED".format(BASELINE_DIR))
 
     # For each unique file stem, run rawspec.
     for path_prefix in SELECTED:
@@ -160,18 +160,18 @@ def main(args=None):
         try:
             dat2tbl.main([dat_name, tbldat_name])
         except:
-            oops("dat2tbl.main({}, {}) FAILED !!".format(dat_name, tbldat_name))
+            oops("dat2tbl.main({}, {}) FAILED".format(dat_name, tbldat_name))
         h5_name = filfile.split('/')[-1].replace(".fil", ".h5")
         tblhdr_name = filfile.split('/')[-1].replace(".fil", ".tblhdr")
         try:
             hdr2tbl.main([h5_name, tblhdr_name])
         except:
-            oops("hdr2tbl.main({}, {}) FAILED !!".format(h5_name, tblhdr_name))
+            oops("hdr2tbl.main({}, {}) FAILED".format(h5_name, tblhdr_name))
         tbldsel_name = filfile.split('/')[-1].replace(".fil", ".tbldsel")
         try:
             dsel2tbl.main([h5_name, tbldsel_name])
         except:
-            oops("dsel2tbl.main({}, {}) FAILED !!".format(h5_name, tbldsel_name))
+            oops("dsel2tbl.main({}, {}) FAILED".format(h5_name, tbldsel_name))
 
         logger.info("Created post-turbo_seti tables for {}.".format(filfile))
 
