@@ -104,6 +104,6 @@ def set_up_logger(my_name):
                         datefmt=TIME_FORMAT,
                         level=logging.INFO)
     logger = logging.getLogger(name=my_name)
-    logger.info("Logging set up complete.")
+    logger.debug("Logging set up complete.")
 
     return logger
