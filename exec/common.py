@@ -54,7 +54,7 @@ def oops(msg):
     sys.exit(86)
 
 
-def run_cmd(cmd, logger, stderr=None):
+def run_cmd(cmd, logger):
     """
     Run an operating system command.
 
@@ -74,14 +74,15 @@ def run_cmd(cmd, logger, stderr=None):
     """
     logger.info("Running `{}` .....".format(cmd))
     try:
-        exit_status = os.system(cmd)
+        here = os.path.dirname(__file__)
+        extcmd = cmd + " 1>{}/stdout.txt 2>{}/stderr.txt".format(here, here)
+        exit_status = os.system(extcmd)
         if exit_status != 0:
-            if stderr is not None:
-                logger.error("Look at stderr file {} !!".format(stderr))
-            oops("os.system({}) FAILED, returned exit status {} !!"
+            logger.error("Look at stderr.txt !!")
+            oops("os.system({}) FAILED, returned exit status {}"
                  .format(cmd, exit_status))
     except Exception as exc:
-        oops("os.system({}) EXCEPTION {} !!"
+        oops("os.system({}) EXCEPTION {}"
              .format(cmd, exc))
  
 
