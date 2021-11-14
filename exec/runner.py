@@ -87,7 +87,7 @@ def main(args=None):
 
     # TEMPORARY WARNING about the --h5 option.
     if args.flag_h5:
-        logging.warning("Currently, the --h5 flag is ignored.")
+        logger.warning("Currently, the --h5 flag is ignored.")
 
     # Show system information.
     osinfo = os.uname()
