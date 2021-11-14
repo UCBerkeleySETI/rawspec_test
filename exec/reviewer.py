@@ -79,7 +79,7 @@ def main(args=None):
     if RUN_TURBO_SETI:
         for baseline_file in sorted(glob.glob("{}/*.tbldat".format(BASELINE_DIR))):
             basename = os.path.basename(baseline_file)
-            logger.info(basename)
+            logger.info("Compare baseline and trial for {} .....".format(basename))
             trial_file = os.path.join(TRIAL_DIR, basename)
             n_errors += compare_tbldat(baseline_file, trial_file)
 
@@ -87,7 +87,7 @@ def main(args=None):
     # compare it to its counterpart in TRIAL_DIR.
     for baseline_file in sorted(glob.glob("{}/*.tblhdr".format(BASELINE_DIR))):
         basename = os.path.basename(baseline_file)
-        logger.info(basename)
+        logger.info("Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tblhdr(baseline_file, trial_file)
 
@@ -95,11 +95,12 @@ def main(args=None):
     # compare it to its counterpart in TRIAL_DIR.
     for baseline_file in sorted(glob.glob("{}/*.tbldsel".format(BASELINE_DIR))):
         basename = os.path.basename(baseline_file)
-        logger.info(basename)
+        logger.info("Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tbldsel(baseline_file, trial_file)
 
     # Compare trial to baseline versions o0f rawspectest .tblnpols files.
+    logger.info("Compare baseline and trial for {} .....".format(RAWSPECTEST_TBL))
     baseline = BASELINE_DIR + RAWSPECTEST_TBL
     trial = TRIAL_DIR + RAWSPECTEST_TBL
     n_errors += compare_tblnpols(baseline, trial)
