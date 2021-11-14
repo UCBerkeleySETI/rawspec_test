@@ -120,7 +120,7 @@ def main(args=None):
     # Go to TRIAL_DIR.
     try:
         os.chdir(TRIAL_DIR)
-        logger.info("Current directory is now {}".format(TRIAL_DIR))
+        logger.debug("Current directory is now {}".format(TRIAL_DIR))
     except:
         oops("os.chdir({}) FAILED !!".format(TRIAL_DIR))
 
