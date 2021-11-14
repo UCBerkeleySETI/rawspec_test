@@ -127,14 +127,13 @@ def main(args=None):
         for one_item in SELECTED:
             the_raw_file_list = sorted(glob.glob("{}*.raw".format(one_item)))
             for one_file in the_raw_file_list:
-                logger.info("Copying {} .....".format(one_file))
                 try:
-                    cmd = "ln -s {}/{}".format(BASELINE_DIR, one_file)
+                    cmd = "ln -s {} {}/{}".format(one_file, BASELINE_DIR, os.path.basename(one_file))
                     run_cmd(cmd, logger)
                 except:
                     oops("{} FAILED".format(cmd))
                 counter += 1
-        logger.info("Copied {} files.".format(counter))
+        logger.info("Linked {} files.".format(counter))
 
     # Initialisation is complete.
     # Go to BASELINE_DIR..
