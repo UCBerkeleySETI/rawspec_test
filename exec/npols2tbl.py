@@ -30,10 +30,8 @@ def do_nbits(wfh, nbits):
 
     """
     logger = set_up_logger("npols2tbl.{}".format(nbits))
-    cmd = "rawspectest {} 2> ".format(nbits) \
-            + RST_STDERR \
-            + " 1> " + RST_STDOUT
-    run_cmd(cmd, logger, RST_STDERR)
+    cmd = "rawspectest {}".format(nbits)
+    run_cmd(cmd, logger)
 
     logger.info("Checking stdout (should not be nil) ...")
     file_size = os.path.getsize(RST_STDOUT)
