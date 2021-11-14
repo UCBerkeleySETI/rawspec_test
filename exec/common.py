@@ -9,7 +9,6 @@ import sys
 import logging
 
 MY_VERSION = "1.1"
-TS_SNR_THRESHOLD = 10
 
 SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
 SOURCE_DIR_2 = "/mnt_blpd5/datax/FRB121102/BLP17/"
@@ -32,6 +31,7 @@ PANDAS_SEPARATOR = "\s+"
 PANDAS_ENGINE = "python"
 
 RUN_TURBO_SETI = False
+TS_SNR_THRESHOLD = 10
 
 # Tolerance of the Relative TO Largest (RTOL).
 # This is the maximum allowed difference between two real numbers
