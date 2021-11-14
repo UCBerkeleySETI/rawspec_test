@@ -56,7 +56,7 @@ def oops(msg):
     sys.exit(86)
 
 
-def run_cmd(cmd, logger):
+def run_cmd(cmd, logger, ignore_errors=False):
     """
     Run an operating system command.
 
@@ -79,6 +79,8 @@ def run_cmd(cmd, logger):
         here = os.path.dirname(__file__)
         extcmd = cmd + " 1>{}/stdout.txt 2>{}/stderr.txt".format(here, here)
         exit_status = os.system(extcmd)
+        if ignore_errors:
+            return
         if exit_status != 0:
             logger.error("Look at stderr.txt !!")
             oops("os.system({}) FAILED, returned exit status {}"
@@ -109,3 +111,4 @@ def set_up_logger(my_name):
     logger.debug("Logging set up complete.")
 
     return logger
+

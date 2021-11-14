@@ -166,7 +166,7 @@ def main(args=None):
         logger.info("Skipping post-run cleanup at the operator's request")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
-        run_cmd(cmd, logger)
+        run_cmd(cmd, logger, ignore_errors=True)
 
     # Bye-bye.
     time2 = time.time()
@@ -176,3 +176,4 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
+
