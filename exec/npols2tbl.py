@@ -33,7 +33,7 @@ def do_nbits(wfh, nbits):
     cmd = "rawspectest {}".format(nbits)
     run_cmd(cmd, logger)
 
-    logger.info("Checking stdout (should not be nil) ...")
+    logger.debug("Checking stdout (should not be nil) ...")
     file_size = os.path.getsize(RST_STDOUT)
     if file_size < 1:
         oops("rawspectest stdout was EMPTY")
