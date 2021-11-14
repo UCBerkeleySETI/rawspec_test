@@ -1,7 +1,7 @@
 """
 Package rawspec_testing
 
-Generate a table based on a turbo_seti .h5 file header, using selected fields.
+Generate a table based on a Filterbank file header, using selected fields.
 """
 
 MY_NAME = "hdr2tbl"

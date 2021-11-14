@@ -27,7 +27,7 @@ import logging
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, \
+from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, RUN_TURBO_SETI, \
                    TRIAL_DIR, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
 import dat2tbl
 import hdr2tbl
@@ -134,26 +134,26 @@ def main(args=None):
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
-        cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
-              .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
-        run_cmd(cmd, logger)
-        dat_name = filfile.split("/")[-1].replace(".fil", ".dat")
-        tbldat_name = filfile.split("/")[-1].replace(".fil", '.tbldat')
-        try:
-            dat2tbl.main([dat_name, tbldat_name])
-        except:
-            oops("dat2tbl.main({}, {}) FAILED !!".format(dat_name, tbldat_name))
-        h5_name = filfile.split("/")[-1].replace(".fil", ".h5")
+        if RUN_TURBO_SETI:
+            cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
+                  .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
+            run_cmd(cmd, logger)
+            dat_name = filfile.split("/")[-1].replace(".fil", ".dat")
+            tbldat_name = filfile.split("/")[-1].replace(".fil", '.tbldat')
+            try:
+                dat2tbl.main([dat_name, tbldat_name])
+            except:
+                oops("dat2tbl.main({}, {}) FAILED !!".format(dat_name, tbldat_name))
         tblhdr_name = filfile.split("/")[-1].replace(".fil", ".tblhdr")
         try:
-            hdr2tbl.main([h5_name, tblhdr_name])
+            hdr2tbl.main([filfile, tblhdr_name])
         except:
-            oops("hdr2tbl.main({}, {}) FAILED !!".format(h5_name, tblhdr_name))
+            oops("hdr2tbl.main({}, {}) FAILED !!".format(filfile, tblhdr_name))
         tbldsel_name = filfile.split('/')[-1].replace(".fil", ".tbldsel")
         try:
-            dsel2tbl.main([h5_name, tbldsel_name])
+            dsel2tbl.main([filfile, tbldsel_name])
         except:
-            oops("dsel2tbl.main({}, {}) FAILED !!".format(h5_name, tbldsel_name))
+            oops("dsel2tbl.main({}, {}) FAILED !!".format(filfile, tbldsel_name))
 
         logger.info("Created post-turbo_seti tables for {}.".format(filfile))
 

@@ -31,6 +31,8 @@ TIME_FORMAT = "%H:%M:%S"
 PANDAS_SEPARATOR = "\s+"
 PANDAS_ENGINE = "python"
 
+RUN_TURBO_SETI = False
+
 # Tolerance of the Relative TO Largest (RTOL).
 # This is the maximum allowed difference between two real numbers
 # relative to the larger absolute value.
