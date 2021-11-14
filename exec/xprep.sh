@@ -2,8 +2,8 @@
 # Install the rawspec repository that is to be tested.
 # Prerequisite: xinstall.sh (caution!)
 
-URL='DUMMY'
-BRANCH='DUMMY'
+URL='https://github.com/UCBerkeleySETI/rawspec'
+BRANCH='master'
 
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
@@ -44,20 +44,20 @@ else
 	echo $MSG 2>&1 | tee -a $LOG
 fi
 echo 2>&1 | tee -a $LOG
-MSG='git clone from URL '$URL', branch '$BRANCH' .....'
+MSG='git clone trial rawspec from URL '$URL', branch '$BRANCH' .....'
 echo $MSG 2>&1 | tee -a $LOG
 git clone -b $BRANCH $URL 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
     oops 'git clone FAILED'
 fi
 echo 2>&1 | tee -a $LOG
-MSG='make rawspec .....'
-echo $MSG 2>&1 | tee -a $LOG
+echo 'Begin make trial rawspec .....' 2>&1 | tee -a $LOG
 cd rawspec
 make 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
     oops 'make FAILED'
 fi
+echo 'End make trial rawspec.' 2>&1 | tee -a $LOG
 
 echo 2>&1 | tee -a $LOG
 echo ======== 2>&1 | tee -a $LOG

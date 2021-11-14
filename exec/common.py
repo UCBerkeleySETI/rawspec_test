@@ -9,6 +9,7 @@ import sys
 import logging
 
 MY_VERSION = "1.1"
+TS_SNR_THRESHOLD = 10
 
 SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
 SOURCE_DIR_2 = "/mnt_blpd5/datax/FRB121102/BLP17/"
@@ -31,7 +32,6 @@ PANDAS_SEPARATOR = "\s+"
 PANDAS_ENGINE = "python"
 
 RUN_TURBO_SETI = False
-TS_SNR_THRESHOLD = 10
 
 # Tolerance of the Relative TO Largest (RTOL).
 # This is the maximum allowed difference between two real numbers
@@ -77,14 +77,19 @@ def run_cmd(cmd, logger, ignore_errors=False):
     logger.info("Running `{}` .....".format(cmd))
     try:
         here = os.path.dirname(__file__)
-        extcmd = cmd + " 1>{}/stdout.txt 2>{}/stderr.txt".format(here, here)
+        stdout = "{}/stdout.txt".format(here)
+        stderr = "{}/stderr.txt".format(here)
+        extcmd = cmd + " 1>{} 2>{}".format(stdout, stderr)
         exit_status = os.system(extcmd)
         if ignore_errors:
             return
         if exit_status != 0:
-            logger.error("Look at stderr.txt !!")
-            oops("os.system({}) FAILED, returned exit status {}"
-                 .format(cmd, exit_status))
+            logger.error("os.system({}) FAILED.\nReturned exit status {}, stderr follows:".format(cmd, exit_status))
+            with open(stderr, "r") as fh:
+                lines = fh.readlines()
+                for line in lines:
+                    print(line)
+            oops("Cannot continue")
     except Exception as exc:
         oops("os.system({}) EXCEPTION {}"
              .format(cmd, exc))
@@ -111,4 +116,3 @@ def set_up_logger(my_name):
     logger.debug("Logging set up complete.")
 
     return logger
-
