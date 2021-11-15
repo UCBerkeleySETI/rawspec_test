@@ -8,7 +8,7 @@ import os
 import sys
 import logging
 
-import site_parameters
+from site_parameters import RAWSPEC_TESTING_DIR, RUN_TURBO_SETI, SELECTED
 
 MY_VERSION = "1.1"
 TS_SNR_THRESHOLD = 10
