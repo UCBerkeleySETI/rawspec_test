@@ -2,8 +2,8 @@
 # Install the rawspec repository that is to be tested.
 # Prerequisite: xinstall.sh (caution!)
 
-URL='https://github.com/UCBerkeleySETI/rawspec'
-BRANCH='master'
+URL='DUMMY'
+BRANCH='DUMMY'
 
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
