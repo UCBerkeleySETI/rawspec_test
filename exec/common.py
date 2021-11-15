@@ -13,19 +13,26 @@ TS_SNR_THRESHOLD = 10
 
 #=====================================================================
 # Begin site-dependent definitions.
+
 SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
+
 SOURCE_DIR_2 = "/mnt_blpd5/datax/FRB121102/BLP17/"
+
 SELECTED = [
     SOURCE_DIR_1 + "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     SOURCE_DIR_2 + "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
     ]
+
 RAWSPEC_TESTING_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
+
+RUN_TURBO_SETI = False
+
 # End site-dependent definitions.
 #=======================================================================
 
 BASELINE_DIR = RAWSPEC_TESTING_DIR + "baseline/"
 TRIAL_DIR = RAWSPEC_TESTING_DIR + "trial/"
-ATA_DIR = RAWSPEC_TESTING_DIR + "ata/"
+ATA_DIR = RAWSPEC_TESTING_DIR + "ata/" # Only used in the UC Berkeley data centre as a source of files to link.
 RAWSPECTEST_TBL = "rawspectest.tblnpols"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
@@ -33,8 +40,6 @@ TIME_FORMAT = "%H:%M:%S"
 
 PANDAS_SEPARATOR = "\s+"
 PANDAS_ENGINE = "python"
-
-RUN_TURBO_SETI = False
 
 # Tolerance of the Relative TO Largest (RTOL).
 # This is the maximum allowed difference between two real numbers
