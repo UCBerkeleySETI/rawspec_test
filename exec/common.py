@@ -18,6 +18,8 @@ SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
 
 SOURCE_DIR_2 = "/mnt_blpd5/datax/FRB121102/BLP17/"
 
+ATA_DIR = RAWSPEC_TESTING_DIR + "ata/" # Only used in the UC Berkeley data centre as a source of files to link.
+
 SELECTED = [
     SOURCE_DIR_1 + "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     SOURCE_DIR_2 + "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
@@ -32,7 +34,6 @@ RUN_TURBO_SETI = False
 
 BASELINE_DIR = RAWSPEC_TESTING_DIR + "baseline/"
 TRIAL_DIR = RAWSPEC_TESTING_DIR + "trial/"
-ATA_DIR = RAWSPEC_TESTING_DIR + "ata/" # Only used in the UC Berkeley data centre as a source of files to link.
 RAWSPECTEST_TBL = "rawspectest.tblnpols"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
