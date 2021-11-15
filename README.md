@@ -6,7 +6,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing/baseline/``` and consists of the following:
 * .raw files provided by @mattlebofsky (Matt Lebofsky)
-* 2 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession. 
+* 2 or 3 table files for each 0000.raw file as a result of running ```rawspec``` and ```turbo_seti``` in succession. Note that ```turbo_seti``` enabling is conditioned on a site variable in ```exec/common.py```: RUN_TURBO_SETI = False/True.  By default, the value is False.
 * 1 table file produced in a rawspectest session.
 
 The intermediate *.fil file produced by ```rawspec``` and the intermediate *.h5, *.dat, and *.log files produced by ```turbo_seti``` have been discarded. 
@@ -19,7 +19,7 @@ The table files are as follows:
 
 All table file types are implemented as CSV files.
 
-The following is a listing of the testing baseline directory:
+The following is a listing of the testing baseline directory when RUN_TURBO_SETI = True:
 ```
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0000.raw
 blc13_guppi_57991_49836_DIAG_FRB121102_0010.0001.raw
@@ -35,6 +35,13 @@ blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tblhdr
 blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008.rawspec.0000.tbldsel
 rawspectest.tblnpols
 ```
+
+Note that there are no *.tbldat files when RUN_TURBO_SETI = False
+
+## 1.1 Site Parameters
+
+The module ```exec/common.py``` contains all of the site parameters, including the RUN_TURBO_SETI flag.  Editing them necessitates an installation afterwards (see the section below entitled "Installing the Testing Baseline").
+
 ## 2.0 Prerequisites to All Activity
 
 Before doing anything else related to rawspec_testing, follow this procedure.
@@ -44,16 +51,17 @@ Before doing anything else related to rawspec_testing, follow this procedure.
      - ```git clone https://github.com/UCBerkeleySETI/rawspec_testing```.
 * Do the following Python package updates in the order specified:
      - ```pip  install  -U  --user  blimpy```
-     - ```pip  install  -U  --user  turbo_seti```
+     - ```pip  install  -U  --user  turbo_seti``` # if and only if RUN_TURBO_SETI = True.
 
 ## 3.0 Testing Operations
 
 ### 3.1 Installing the Testing Baseline (caution!)
 
-IMPORTANT: This procedure is generally unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the test data itself.  Still, consider simpler methods before using this procedure.
+IMPORTANT: This procedure is unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the site parameters or to the test data itself.
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
+* If needed, edit ```common.py```.
 * ```bash xinstall.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ### 3.2 Testing a New Pull Request
@@ -61,8 +69,9 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
 * Edit the ```xprep.sh``` script to supply the PR's URL value and the specific BRANCH name value.  The URL string should end in “…./rawspec”.
-* Run ```bash xprep.sh```.
-* Run ```bash xtest.sh  <GPU_ID (0, 2, 3, or 3)>```
+* An alternative is to use JupyterLab or Visual Studio Code to edit the ```xprep.sh``` script.
+* Then, run ```bash xprep.sh``` to set up testing with the PR code base.
+* Finally, run ```bash xtest.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ## 4.0 Bash Script Design Overviews
 
@@ -104,14 +113,15 @@ IMPORTANT: This procedure is generally unnecessary for PR testing and has the po
 * Run rawspec on all the file stems.
 * For each Filterbank file produced by rawspec, run hdr2tbl.main producing a .tblhdr file.
 * For each Filterbank file, run dsel2tbl.main producing a .tbldsel file.
-* For each Filterbank file, run turboSETI.
-* For each .dat file produced by turboSETI, run dat2tbl.main producing a .tbldat file.
+* If RUN_TURBO_SETI = True, 
+    - For each Filterbank file, run turboSETI.
+    - For each .dat file produced by turboSETI, run dat2tbl.main producing a .tbldat file.
 * Run rawspectest, producing rawspectest.tblnpols.
 * ```rm *.dat *.fil *.h5 *.log```.
 
 ### 5.2 runner.py
 
-The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing/trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti```, the testing utility scripts (```npols2tbl.py```, ```dat2tbl.py```, ```hdr2tbl.py```, and ```dsel2tbl.py```), and ```rawspectest```.  There are a lot of similarities between ```runner.py``` and ```installer.py```.
+The ```runner.py``` script builds a testing trial directory at ```/mnt_blpd20/scratch/rawspec_testing/trial```.  This will replace any old trial artifacts that might have been left over from a previous execution.  Then, it runs ```rawspectest```, ```rawspec```, ```turbo_seti``` (if RUN_TURBO_SETI = True), the testing utility scripts {```npols2tbl.py```, ```dat2tbl.py``` (if RUN_TURBO_SETI = True), ```hdr2tbl.py```, and ```dsel2tbl.py```}, and ```rawspectest```.  There are a lot of similarities between ```runner.py``` and ```installer.py```.
 
 ### 5.3 reviewer.py
 
