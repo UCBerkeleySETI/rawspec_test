@@ -19,13 +19,13 @@ SELECTED = [
     SOURCE_DIR_1 + "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     SOURCE_DIR_2 + "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
     ]
-RAWSPEC_TEST_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
+RAWSPEC_TESTING_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
 # End site-dependent definitions.
 #=======================================================================
 
-BASELINE_DIR = RAWSPEC_TEST_DIR + "baseline/"
-TRIAL_DIR = RAWSPEC_TEST_DIR + "trial/"
-ATA_DIR = RAWSPEC_TEST_DIR + "ata/"
+BASELINE_DIR = RAWSPEC_TESTING_DIR + "baseline/"
+TRIAL_DIR = RAWSPEC_TESTING_DIR + "trial/"
+ATA_DIR = RAWSPEC_TESTING_DIR + "ata/"
 RAWSPECTEST_TBL = "rawspectest.tblnpols"
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
