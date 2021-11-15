@@ -61,7 +61,7 @@ IMPORTANT: This procedure is unnecessary for PR testing and has the potential to
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
-* If needed, edit ```common.py```.
+* If needed, edit ```common.py``` as mentioned above.
 * ```bash xinstall.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ### 3.2 Testing a New Pull Request
