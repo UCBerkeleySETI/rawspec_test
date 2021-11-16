@@ -16,7 +16,7 @@ function oops {
 	exit 86
 }
 
-function check_id {
+function check_gpu_id {
     case "$1" in
         (*[!0-9]*)
             oops 'The specified GPU ID is not numeric: '$1
@@ -27,28 +27,32 @@ function check_id {
     fi
  }
 
+function check_y_or_n {
+    case "$1" in
+        y)  echo "--fbh5"
+            ;;
+        n)  echo ""
+            ;;
+        (default)
+            oops 'check_y_or_n expects y or n but saw this: '$1
+    esac
+ }
+
 # One command line argument (optional): GPU ID.
 
 NARGS=$#
-[ $NARGS -gt 1 ] && oops 'Exactly 1 argument is needed: GPU ID (0, 1, 2, or 3)'
+[ $NARGS -ne 2 ] && oops '2 arguments must be supplied: GPU ID (0, 1, 2, or 3) and either y (.h5 output) or n (.fil output)'
+GPU_ID=$1
+Q_USE_H5=$2
 
-if [ $NARGS == 0 ]; then
-    echo 
-    MSG='The operator did not supply a GPU ID so we will use GPU_ID=0'
-    echo $MSG 2>&1 | tee -a $LOG
-    echo
-    GPU_ID=0
-else
-    GPU_ID=$1
-fi
-
-check_id $GPU_ID
+check_gpu_id $GPU_ID
+FBH5_OPT=$(check_y_or_n $Q_USE_H5)
 
 export PATH=$HOME/rawspec:$PATH
 export LD_LIBRARY_PATH=$HOME/rawspec
 
 cd $HOME/rawspec_testing/exec
-python3 runner.py -g $GPU_ID 2>&1 | tee -a $LOG
+python3 runner.py $FBH5_OPT -g $GPU_ID 2>&1 | tee -a $LOG
 if [ $? -eq 0 ]; then
     python3 reviewer.py 2>&1 | tee -a $LOG
 fi
