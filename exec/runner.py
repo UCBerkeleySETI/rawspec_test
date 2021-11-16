@@ -56,9 +56,9 @@ def main(args=None):
                         type=int,
                         required=True,
                         help="GPU device ID (0-3) to use in rawspec and turbo_seti")
-    parser.add_argument("--h5",
-                        dest="flag_h5",
-                        default=True,
+    parser.add_argument("--fbh5",
+                        dest="flag_fbh5",
+                        default=False,
                         action="store_true",
                         help="Rawspec will produce .h5 files instead of .fil files.")
     parser.add_argument("-S", "--skip_cleanup",
@@ -82,12 +82,16 @@ def main(args=None):
         print("installer: {}".format(MY_VERSION))
         sys.exit(0)
 
+    # Process --fbh5 option.
+    if args.flag_fbh5:
+        fbh5_opt = "--fbh5"
+        fileext = ".h5"
+    else:
+        fbh5_opt = ""
+        fileext = ".fil"
+
     # Set up logging.
     logger = set_up_logger(MY_NAME)
-
-    # TEMPORARY WARNING about the --h5 option.
-    if args.flag_h5:
-        logger.warning("Currently, the --h5 flag is ignored.")
 
     # Show system information.
     osinfo = os.uname()
@@ -128,34 +132,34 @@ def main(args=None):
     # Note: If a rawspec file is X.0000.raw then its rawstem is X.
     for one_raw_file in sorted(glob.glob("{}/*.0000.raw".format(BASELINE_DIR))):
         rawstem = one_raw_file[0:-9]
-        cmd = "rawspec  -f 1048576  -t 51  -g {}  -d {}  {}" \
-              .format(args.gpu_id, TRIAL_DIR, rawstem)
+        cmd = "rawspec {} -f 1048576  -t 51  -g {}  -d {}  {}" \
+              .format(fbh5_opt, args.gpu_id, TRIAL_DIR, rawstem)
         run_cmd(cmd, logger)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
-    for filfile in sorted(glob.glob("*.fil")):
+    for fb_file in sorted(glob.glob("*{}".format(fileext))):
         if RUN_TURBO_SETI:
             cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
-                  .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
+                  .format(TS_SNR_THRESHOLD, args.gpu_id, fb_file)
             run_cmd(cmd, logger)
-            dat_name = filfile.split("/")[-1].replace(".fil", ".dat")
-            tbldat_name = filfile.split("/")[-1].replace(".fil", '.tbldat')
+            dat_name = fb_file.split("/")[-1].replace(fileext, ".dat")
+            tbldat_name = fb_file.split("/")[-1].replace(fileext, '.tbldat')
             try:
                 dat2tbl.main([dat_name, tbldat_name])
             except:
                 oops("dat2tbl.main({}, {}) FAILED !!".format(dat_name, tbldat_name))
-        tblhdr_name = filfile.split("/")[-1].replace(".fil", ".tblhdr")
+        tblhdr_name = fb_file.split("/")[-1].replace(fileext, ".tblhdr")
         try:
-            hdr2tbl.main([filfile, tblhdr_name])
+            hdr2tbl.main([fb_file, tblhdr_name])
         except:
-            oops("hdr2tbl.main({}, {}) FAILED !!".format(filfile, tblhdr_name))
-        tbldsel_name = filfile.split('/')[-1].replace(".fil", ".tbldsel")
+            oops("hdr2tbl.main({}, {}) FAILED !!".format(fb_file, tblhdr_name))
+        tbldsel_name = fb_file.split('/')[-1].replace(fileext, ".tbldsel")
         try:
-            dsel2tbl.main([filfile, tbldsel_name])
+            dsel2tbl.main([fb_file, tbldsel_name])
         except:
-            oops("dsel2tbl.main({}, {}) FAILED !!".format(filfile, tbldsel_name))
+            oops("dsel2tbl.main({}, {}) FAILED !!".format(fb_file, tbldsel_name))
 
-        logger.info("Created post-turbo_seti tables for {}.".format(filfile))
+        logger.info("Created post-turbo_seti tables for {}.".format(fb_file))
 
     # rawspectest cases.
     tblnpols_name = TRIAL_DIR + RAWSPECTEST_TBL
