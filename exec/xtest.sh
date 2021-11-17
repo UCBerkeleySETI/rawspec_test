@@ -27,32 +27,36 @@ function check_gpu_id {
     fi
  }
 
-function check_y_or_n {
-    case "$1" in
-        y)  echo "--fbh5"
-            ;;
-        n)  echo ""
-            ;;
-        (default)
-            oops 'check_y_or_n expects y or n but saw this: '$1
-    esac
- }
-
 # One command line argument (optional): GPU ID.
 
 NARGS=$#
-[ $NARGS -ne 2 ] && oops '2 arguments must be supplied: GPU ID (0, 1, 2, or 3) and either y (.h5 output) or n (.fil output)'
+[ $NARGS -ne 1 ] && oops '1 argument must be supplied: GPU ID (0, 1, 2, or 3)'
 GPU_ID=$1
 Q_USE_H5=$2
 
 check_gpu_id $GPU_ID
-FBH5_OPT=$(check_y_or_n $Q_USE_H5)
 
 export PATH=$HOME/rawspec:$PATH
 export LD_LIBRARY_PATH=$HOME/rawspec
 
 cd $HOME/rawspec_testing/exec
-python3 runner.py $FBH5_OPT -g $GPU_ID 2>&1 | tee -a $LOG
+
+# SIGPROC Filterbank testing.
+echo 2>&1 | tee -a $LOG
+echo =============== 2>&1 | tee -a $LOG
+echo SIGPROC Testing 2>&1 | tee -a $LOG
+echo =============== 2>&1 | tee -a $LOG
+python3 runner.py -g $GPU_ID 2>&1 | tee -a $LOG
+if [ $? -eq 0 ]; then
+    python3 reviewer.py 2>&1 | tee -a $LOG
+fi
+
+# FBH5 testing.
+echo 2>&1 | tee -a $LOG
+echo ============ 2>&1 | tee -a $LOG
+echo FBH5 Testing 2>&1 | tee -a $LOG
+echo ============ 2>&1 | tee -a $LOG
+python3 runner.py --fbh5 -g $GPU_ID 2>&1 | tee -a $LOG
 if [ $? -eq 0 ]; then
     python3 reviewer.py 2>&1 | tee -a $LOG
 fi
