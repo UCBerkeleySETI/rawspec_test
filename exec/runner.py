@@ -159,7 +159,7 @@ def main(args=None):
         except:
             oops("dsel2tbl.main({}, {}) FAILED !!".format(fb_file, tbldsel_name))
 
-        logger.info("Created post-turbo_seti tables for {}.".format(fb_file))
+        logger.info("Created tables for {}.".format(fb_file))
 
     # rawspectest cases.
     tblnpols_name = TRIAL_DIR + RAWSPECTEST_TBL
