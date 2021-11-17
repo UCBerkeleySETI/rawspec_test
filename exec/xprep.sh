@@ -44,7 +44,7 @@ else
 	echo $MSG 2>&1 | tee -a $LOG
 fi
 echo 2>&1 | tee -a $LOG
-MSG='git clone trial rawspec from URL '$URL', branch '$BRANCH' .....'
+MSG='git clone trial rawspec from URL='$URL', branch='$BRANCH' .....'
 echo $MSG 2>&1 | tee -a $LOG
 git clone -b $BRANCH $URL 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
