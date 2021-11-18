@@ -8,14 +8,8 @@ import os
 import sys
 import logging
 
-from site_parameters import RAWSPEC_TESTING_DIR, RUN_TURBO_SETI, SELECTED
-
-MY_VERSION = "1.1"
-TS_SNR_THRESHOLD = 10
-
-BASELINE_DIR = RAWSPEC_TESTING_DIR + "baseline/"
-TRIAL_DIR = RAWSPEC_TESTING_DIR + "trial/"
-RAWSPECTEST_TBL = "rawspectest.tblnpols"
+MY_VERSION = "1.2"
+TS_SNR_THRESHOLD = 10 # for turbo_seti
 
 LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
 TIME_FORMAT = "%H:%M:%S"
@@ -64,18 +58,20 @@ def run_cmd(cmd, logger, ignore_errors=False):
     None.
 
     """
-    logger.info("Running `{}` .....".format(cmd))
+    logger.info("run_cmd: `{}` .....".format(cmd))
     try:
         here = os.path.dirname(__file__)
-        stdout = "{}/stdout.txt".format(here)
-        stderr = "{}/stderr.txt".format(here)
-        extcmd = cmd + " 1>{} 2>{}".format(stdout, stderr)
+        stdout_path = "{}/stdout.txt".format(here)
+        stderr_path = "{}/stderr.txt".format(here)
+        extcmd = cmd + " 1>{} 2>{}".format(stdout_path, stderr_path)
         exit_status = os.system(extcmd)
         if ignore_errors:
             return
-        if exit_status != 0:
-            logger.error("os.system({}) FAILED.\nReturned exit status {}, stderr follows:".format(cmd, exit_status))
-            with open(stderr, "r") as fh:
+        stderr_size = os.path.getsize(stderr_path)
+        if exit_status != 0 or stderr_size > 0:
+            logger.error("os.system({}) FAILED.\nReturned exit status {}, stderr follows:"
+                         .format(cmd, exit_status))
+            with open(stderr_path, "r") as fh:
                 lines = fh.readlines()
                 for line in lines:
                     print(line)
@@ -83,7 +79,7 @@ def run_cmd(cmd, logger, ignore_errors=False):
     except Exception as exc:
         oops("os.system({}) EXCEPTION {}"
              .format(cmd, exc))
- 
+
 
 def set_up_logger(my_name):
     """
