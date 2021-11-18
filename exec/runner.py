@@ -1,12 +1,14 @@
 """
 Package rawspec_testing
 
-* Create <trial directory> tree under /tmp.
+Creates/recreates the rawspec testing trial directory.
+
+* Create <trial directory>.
 * cd <trial diretcory>
 * For each .raw file in the <baseline directory>, do the following:
-    - rawspec   -f 1048576   -t 51  --dest .   <full path of the .raw file prefix>
+    - rawspec   <rawspec options>  --dest .   <full path of the .raw file prefix>
 * For each ext = .fil or .h5 file in the <trial directory> produced by rawspec, do the following:
-    - turboSETI   -n 64   -s 10   -g y   -d <GPU_ID>   <0000.ext file>
+    - Optionally, turboSETI   -s 10   -g y   -d <GPU_ID>   <0000.ext file>
     - Create a .tbldat file.
     - Create a .tblhdr file.
     - Create a .tbldsel file.
@@ -23,12 +25,12 @@ import time
 import shutil
 import stat
 from datetime import timedelta
-import logging
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, RUN_TURBO_SETI, \
-                   TRIAL_DIR, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
+from site_parameters import BASELINE_DIR, RAWSPEC_OPTS, RAWSPECTEST_TBL, \
+                            RUN_TURBO_SETI, SELECTED, TRIAL_DIR
+from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
 import dat2tbl
 import hdr2tbl
 import npols2tbl
@@ -79,19 +81,21 @@ def main(args=None):
         args = parser.parse_args(args)
 
     if args.show_version:
-        print("installer: {}".format(MY_VERSION))
+        print("runner: {}".format(MY_VERSION))
         sys.exit(0)
+
+    # Set up logging.
+    logger = set_up_logger(MY_NAME)
 
     # Process --fbh5 option.
     if args.flag_fbh5:
         fbh5_opt = "--fbh5"
         fileext = ".h5"
+        logger.info("Output format is FBH5.")
     else:
         fbh5_opt = ""
         fileext = ".fil"
-
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
+        logger.info("Output format is SIGPROC Filterbank.")
 
     # Show system information.
     osinfo = os.uname()
@@ -130,10 +134,10 @@ def main(args=None):
 
     # For each unique file stem, run rawspec.
     # Note: If a rawspec file is X.0000.raw then its rawstem is X.
-    for one_raw_file in sorted(glob.glob("{}/*.0000.raw".format(BASELINE_DIR))):
-        rawstem = one_raw_file[0:-9]
-        cmd = "rawspec {} -f 1048576  -t 51  -g {}  -d {}  {}" \
-              .format(fbh5_opt, args.gpu_id, TRIAL_DIR, rawstem)
+    for ii, path_prefix in enumerate(SELECTED):
+        rawstem = os.path.basename(path_prefix)
+        rawspec_opts = RAWSPEC_OPTS[ii]
+        cmd = "rawspec  {}  {}  -g {}  -d .  {}/{}".format(rawspec_opts, fbh5_opt, args.gpu_id, BASELINE_DIR, rawstem)
         run_cmd(cmd, logger)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
