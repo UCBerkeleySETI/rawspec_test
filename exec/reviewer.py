@@ -1,10 +1,13 @@
 """
 Package rawspec_testing
 
+Review the results of runner.py activities.
+
 * cd <trial diretcory>
 * For each .tbldat file in the <trial directory>, do the following:
-    - Compare   <.tbldat file> to counterpart in the baseline
+    - Optional: Compare   <.tbldat file> to counterpart in the baseline
     - Compare   <.tblhdr file> to counterpart in the baseline
+    - Compare   <.tbldsel file> to counterpart in the baseline
     - Compare   <.tblnpols file> to counterpart in the baseline
 * In all cases, report SUCCESS or FAILURE.
 """
@@ -17,8 +20,9 @@ import glob
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, RUN_TURBO_SETI, TRIAL_DIR, \
-                   oops, set_up_logger
+from site_parameters import BASELINE_DIR, RAWSPECTEST_TBL, \
+                            RUN_TURBO_SETI, TRIAL_DIR
+from common import MY_VERSION, oops, set_up_logger
 from compare_2_csvs import compare_tbldat, compare_tblhdr, compare_tblnpols, compare_tbldsel
 
 
