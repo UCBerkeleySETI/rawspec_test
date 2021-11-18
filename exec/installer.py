@@ -8,9 +8,9 @@ Creates/recreates the rawspec testing baseline.
     from one of the source directories
     to the baseline directory.
 * For each .raw file in the baseline directory, do the following:
-    - rawspec   -f 1048576   -t 51   <.raw file prefix>
+    - rawspec   <rawspec options>   <.raw file prefix>
 * For each .fil file in the baseline directory produced by rawspec, do the following:
-    - turboSETI   -n 64   -s 10   -g y   -d <GPU_ID>   <0000.fil file>
+    - Optionally: turboSETI   -s 10   -g y   -d <GPU_ID>   <0000.fil/.h5 file>
     - Create a .tbldat file.
     - Create a .tblhdr file.
     - Create a .tbldsel file.
@@ -27,8 +27,9 @@ from datetime import timedelta
 from argparse import ArgumentParser
 
 # Helper functions:
-from common import BASELINE_DIR, MY_VERSION, RAWSPECTEST_TBL, RUN_TURBO_SETI, \
-                   SELECTED, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
+from site_parameters import BASELINE_DIR, RAWSPEC_OPTS, RAWSPECTEST_TBL, \
+                            RUN_TURBO_SETI, SELECTED
+from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
 import dat2tbl
 import hdr2tbl
 import npols2tbl
@@ -144,9 +145,11 @@ def main(args=None):
         oops("os.chdir({}) FAILED".format(BASELINE_DIR))
 
     # For each unique file stem, run rawspec.
-    for path_prefix in SELECTED:
+    # Note: If a rawspec file is X.0000.raw then its rawstem is X.
+    for ii, path_prefix in enumerate(SELECTED):
         rawstem = os.path.basename(path_prefix)
-        cmd = "rawspec  -f 1048576  -t 51  -g {}  {}".format(args.gpu_id, rawstem)
+        rawspec_opts = RAWSPEC_OPTS[ii]
+        cmd = "rawspec  {}  -g {}  {}".format(rawspec_opts, args.gpu_id, rawstem)
         run_cmd(cmd, logger)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
@@ -193,4 +196,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-
