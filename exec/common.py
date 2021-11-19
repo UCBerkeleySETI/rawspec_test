@@ -94,5 +94,4 @@ def logger(my_name, msg):
     None
     """
     now = strftime(FMT_LOGGER_TIMESTAMP, localtime())
-    print("{}  {}  {}".format(now, my_name, msg))
-
+    print("{}  {}  {}".format(now, my_name, msg), flush=True)
