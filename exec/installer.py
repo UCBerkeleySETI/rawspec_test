@@ -110,7 +110,7 @@ def main(args=None):
             logger.info("installer: This utility script is about to initialise the rawspec test baseline.")
             logger.info("installer: Baseline directory will be {}.".format(BASELINE_DIR))
             logger.info("installer: The first step is to remove old artifacts if they exist.")
-            answer = input("\ninstaller: Okay to proceed? (yes/[anything else]: ")
+            answer = input("\ninstaller: Okay to proceed? (yes/[anything_else=no]: ")
             if answer != "yes":
                 logger.warning("installer: Execution canceled by the operator.")
                 sys.exit(0)
