@@ -6,8 +6,9 @@ Generate a table based on rawspectest output.
 import os
 import sys
 from argparse import ArgumentParser
-from common import MY_VERSION, oops, run_cmd, set_up_logger
+from common import MY_VERSION, oops, run_cmd, logger
 
+MY_NAME = "npols2tbl"
 RAWSPECTEST_DIR = os.environ["HOME"] + "/rawspec_testing/exec/"
 RST_STDOUT = RAWSPECTEST_DIR + "stdout.txt"
 RST_STDERR = RAWSPECTEST_DIR + "stderr.txt"
@@ -29,11 +30,9 @@ def do_nbits(wfh, nbits):
     None.
 
     """
-    logger = set_up_logger("npols2tbl.{}".format(nbits))
     cmd = "rawspectest {}".format(nbits)
-    run_cmd(cmd, logger)
+    run_cmd(cmd)
 
-    logger.debug("Checking stdout (should not be nil) ...")
     file_size = os.path.getsize(RST_STDOUT)
     if file_size < 1:
         oops("rawspectest stdout was EMPTY")
@@ -110,8 +109,7 @@ def main(args=None):
         do_nbits(wfh,  8)
         do_nbits(wfh, 16)
 
-    logger = set_up_logger("npols2tbl")
-    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
+    logger(MY_NAME, "Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":
