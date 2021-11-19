@@ -55,7 +55,7 @@ def run_cmd(cmd, ignore_errors=False):
     None.
 
     """
-    logger("run_cmd", "run_cmd: `{}` .....".format(cmd))
+    logger("run_cmd", "`{}` .....".format(cmd))
     try:
         here = os.path.dirname(__file__)
         stdout_path = "{}/stdout.txt".format(here)
