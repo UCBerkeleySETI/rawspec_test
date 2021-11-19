@@ -29,7 +29,7 @@ from argparse import ArgumentParser
 # Helper functions:
 from site_parameters import BASELINE_DIR, RAWSPEC_OPTS, RAWSPECTEST_TBL, \
                             RUN_TURBO_SETI, SELECTED
-from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
+from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, logger
 import dat2tbl
 import hdr2tbl
 import npols2tbl
@@ -88,31 +88,28 @@ def main(args=None):
         print("installer: {}".format(MY_VERSION))
         sys.exit(0)
 
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
-
     # Take a timestamp
     time1 = time.time()
 
     # Skip initialisation?
     if args.flag_skip_init:
-        logger.info("Skipping pre-rawspec initialisation at the operator's request")
+        logger(MY_NAME, "Skipping pre-rawspec initialisation at the operator's request")
     else:
         # Show system information.
         osinfo = os.uname()
-        logger.info("O/S name = {}, release = {}, version = {}"
+        logger(MY_NAME, "O/S name = {}, release = {}, version = {}"
                     .format(osinfo.sysname, osinfo.release, osinfo.version))
-        logger.info("Node name = {}, CPU type = {}, HOME = {}"
+        logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
                     .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
 
         # Interact with the operator if not in batch mode.
         if not args.flag_batch:
-            logger.info("installer: This utility script is about to initialise the rawspec test baseline.")
-            logger.info("installer: Baseline directory will be {}.".format(BASELINE_DIR))
-            logger.info("installer: The first step is to remove old artifacts if they exist.")
+            logger(MY_NAME, "This utility script is about to initialise the rawspec test baseline.")
+            logger(MY_NAME, "Baseline directory will be {}.".format(BASELINE_DIR))
+            logger(MY_NAME, "The first step is to remove old artifacts if they exist.")
             answer = input("\ninstaller: Okay to proceed? (yes/[anything_else=no]: ")
             if answer != "yes":
-                logger.warning("installer: Execution canceled by the operator.")
+                logger("installer", "Execution canceled by the operator.")
                 sys.exit(0)
 
         # BASELINE_DIR exists?
@@ -121,7 +118,7 @@ def main(args=None):
 
         # Remove old artifacts.
         cmd = "rm -rf {}/*".format(BASELINE_DIR)
-        run_cmd(cmd, logger, ignore_errors=True)
+        run_cmd(cmd, ignore_errors=True)
 
         # Copy the selected files to BASELINE_DIR.
         counter = 0
@@ -134,13 +131,13 @@ def main(args=None):
                 except:
                     oops("{} FAILED".format(cmd))
                 counter += 1
-        logger.info("Linked {} files.".format(counter))
+        logger(MY_NAME, "Linked {} files.".format(counter))
 
     # Initialisation is complete.
     # Go to BASELINE_DIR..
     try:
         os.chdir(BASELINE_DIR)
-        logger.info("Current directory is now {}".format(BASELINE_DIR))
+        logger(MY_NAME, "Current directory is now {}".format(BASELINE_DIR))
     except:
         oops("os.chdir({}) FAILED".format(BASELINE_DIR))
 
@@ -175,7 +172,7 @@ def main(args=None):
         except:
             oops("dsel2tbl.main({}, {}) FAILED".format(filfile, tbldsel_name))
 
-        logger.info("Created post-turbo_seti tables for {}.".format(filfile))
+        logger(MY_NAME, "Created post-turbo_seti tables for {}.".format(filfile))
 
     # Create rawspectest baseline table.
     tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
@@ -183,15 +180,15 @@ def main(args=None):
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
-        logger.info("Skipping post-run cleanup at the operator's request")
+        logger(MY_NAME, "Skipping post-run cleanup at the operator's request")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
-        run_cmd(cmd, logger, ignore_errors=True)
+        run_cmd(cmd, ignore_errors=True)
 
     # Bye-bye.
     time2 = time.time()
     time_delta = timedelta(seconds=(time2 - time1))
-    logger.info("End, elapsed hh:mm:ss = {}".format(time_delta))
+    logger(MY_NAME, "End, elapsed hh:mm:ss = {}".format(time_delta))
 
 
 if __name__ == "__main__":

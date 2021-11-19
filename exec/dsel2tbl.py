@@ -11,7 +11,7 @@ import os
 from argparse import ArgumentParser
 
 # Helpers:
-from common import MY_VERSION, set_up_logger
+from common import MY_VERSION, logger
 from blimpy import Waterfall
 
 
@@ -28,18 +28,16 @@ def main(args=None):
 
     """
 
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
-
     # Create an option parser to get command-line input/arguments
-    parser = ArgumentParser(description="hdr2tbl version {}."
-                                        .format(MY_VERSION))
+    parser = ArgumentParser(description="{} version {}."
+                                        .format(MY_NAME, MY_VERSION))
 
     parser.add_argument("fbfile", type=str, default="", nargs="?",
                         help="Path of .fil or .h5 file to open for reading")
     parser.add_argument("tblfile", type=str, default="", nargs="?",
                         help="Path of .tbldsel file to open for writing")
-    parser.add_argument("-v", "--version", dest="show_version", default=False, action="store_true",
+    parser.add_argument("-v", "--version", dest="show_version", default=False, 
+                        action="store_true",
                         help="show the dsel2tbl version and exit")
 
     # Validate arguments.
@@ -62,7 +60,7 @@ def main(args=None):
 
     # Get Waterfall object.
     wf = Waterfall(args.fbfile)
-    logger.info("Data shape = ({}, {}, {})"
+    logger(MY_NAME, "Data shape = ({}, {}, {})"
                 .format(wf.n_ints_in_file, wf.header["nifs"], wf.n_channels_in_file))
     assert wf.n_ints_in_file > 1
     assert wf.n_channels_in_file > 3
@@ -91,7 +89,7 @@ def main(args=None):
         csvfile.write("Bullseye,{},{},{}\n"
                       .format(bullseye[0], bullseye[1], bullseye[2]))
 
-    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
+    logger(MY_NAME, "Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":

@@ -30,7 +30,7 @@ from argparse import ArgumentParser
 # Helper functions:
 from site_parameters import BASELINE_DIR, RAWSPEC_OPTS, RAWSPECTEST_TBL, \
                             RUN_TURBO_SETI, SELECTED, TRIAL_DIR
-from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, set_up_logger
+from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, logger
 import dat2tbl
 import hdr2tbl
 import npols2tbl
@@ -84,24 +84,21 @@ def main(args=None):
         print("runner: {}".format(MY_VERSION))
         sys.exit(0)
 
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
-
     # Process --fbh5 option.
     if args.flag_fbh5:
         fbh5_opt = "--fbh5"
         fileext = ".h5"
-        logger.info("Output format is FBH5.")
+        logger(MY_NAME, "Output format is FBH5.")
     else:
         fbh5_opt = ""
         fileext = ".fil"
-        logger.info("Output format is SIGPROC Filterbank.")
+        logger(MY_NAME, "Output format is SIGPROC Filterbank.")
 
     # Show system information.
     osinfo = os.uname()
-    logger.info("O/S name = {}, release = {}, version = {}"
+    logger(MY_NAME, "O/S name = {}, release = {}, version = {}"
                 .format(osinfo.sysname, osinfo.release, osinfo.version))
-    logger.info("Node name = {}, CPU type = {}, HOME = {}"
+    logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
                 .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
 
     # Take a timestamp
@@ -119,7 +116,7 @@ def main(args=None):
         os.mkdir(TRIAL_DIR)
         mode = stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO
         os.chmod(TRIAL_DIR, mode=mode)
-        logger.info("Created directory {} with mode={}."
+        logger(MY_NAME, "Created directory {} with mode={}."
               .format(TRIAL_DIR, oct(mode)))
     except:
         oops("os.mkdir/os.chmod({}, mode={}) FAILED !!"
@@ -128,7 +125,6 @@ def main(args=None):
     # Go to TRIAL_DIR.
     try:
         os.chdir(TRIAL_DIR)
-        logger.debug("Current directory is now {}".format(TRIAL_DIR))
     except:
         oops("os.chdir({}) FAILED !!".format(TRIAL_DIR))
 
@@ -163,7 +159,7 @@ def main(args=None):
         except:
             oops("dsel2tbl.main({}, {}) FAILED !!".format(fb_file, tbldsel_name))
 
-        logger.info("Created tables for {}.".format(fb_file))
+        logger(MY_NAME, "Created tables for {}.".format(fb_file))
 
     # rawspectest cases.
     tblnpols_name = TRIAL_DIR + RAWSPECTEST_TBL
@@ -171,15 +167,15 @@ def main(args=None):
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
-        logger.info("Skipping post-run cleanup at the operator's request")
+        logger(MY_NAME, "Skipping post-run cleanup at the operator's request")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
-        run_cmd(cmd, logger, ignore_errors=True)
+        run_cmd(cmd, ignore_errors=True)
 
     # Bye-bye.
     time2 = time.time()
     time_delta = timedelta(seconds=(time2 - time1))
-    logger.info("Bye-bye, elapsed hh:mm:ss = {}".format(time_delta))
+    logger(MY_NAME, "Bye-bye, elapsed hh:mm:ss = {}".format(time_delta))
 
 
 if __name__ == "__main__":

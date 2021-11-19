@@ -6,13 +6,12 @@ Common definitions and functions.
 
 import os
 import sys
-import logging
+from time import strftime, localtime
 
 MY_VERSION = "1.2"
 TS_SNR_THRESHOLD = 10 # for turbo_seti
 
-LOGGER_FORMAT = "%(asctime)s  %(name)s  %(levelname)s  %(message)s"
-TIME_FORMAT = "%H:%M:%S"
+FMT_LOGGER_TIMESTAMP = "%H:%M:%S "
 
 PANDAS_SEPARATOR = "\s+"
 PANDAS_ENGINE = "python"
@@ -40,7 +39,7 @@ def oops(msg):
     sys.exit(86)
 
 
-def run_cmd(cmd, logger, ignore_errors=False):
+def run_cmd(cmd, ignore_errors=False):
     """
     Run an operating system command.
 
@@ -48,8 +47,6 @@ def run_cmd(cmd, logger, ignore_errors=False):
     ----------
     cmd : str
         O/S command to run.
-    logger : logging object
-        Announce the running command.
     stderr : str, optional
         If an error happens, log that there is a stderr file available.
 
@@ -58,7 +55,7 @@ def run_cmd(cmd, logger, ignore_errors=False):
     None.
 
     """
-    logger.info("run_cmd: `{}` .....".format(cmd))
+    logger("run_cmd", "run_cmd: `{}` .....".format(cmd))
     try:
         here = os.path.dirname(__file__)
         stdout_path = "{}/stdout.txt".format(here)
@@ -69,7 +66,7 @@ def run_cmd(cmd, logger, ignore_errors=False):
             return
         stderr_size = os.path.getsize(stderr_path)
         if exit_status != 0 or stderr_size > 0:
-            logger.error("os.system({}) FAILED.\nReturned exit status {}, stderr follows:"
+            logger("run_cmd", "os.system({}) FAILED.\nReturned exit status {}, stderr follows:"
                          .format(cmd, exit_status))
             with open(stderr_path, "r") as fh:
                 lines = fh.readlines()
@@ -81,26 +78,21 @@ def run_cmd(cmd, logger, ignore_errors=False):
              .format(cmd, exc))
 
 
-def set_up_logger(my_name):
+def logger(my_name, msg):
     """
-    Set up the logger.
+    Log a time-stamped message.
 
     Parameters
     ----------
     my_name : str
         The name of the caller.
+    msg : str
+        The message to log.
 
     Returns
     -------
-    logger : logging object
+    None
     """
-    formatter = logging.Formatter(fmt=LOGGER_FORMAT,
-                                  datefmt=TIME_FORMAT)
-    screen_handler = logging.StreamHandler(stream=sys.stdout)
-    screen_handler.setFormatter(formatter)
-    logger = logging.getLogger(my_name)
-    logger.propagate = False
-    logger.addHandler(screen_handler)
-    logger.setLevel(logging.INFO)
+    now = strftime(FMT_LOGGER_TIMESTAMP, localtime())
+    print("{}  {}  {}".format(now, my_name, msg))
 
-    return logger

@@ -8,11 +8,10 @@ MY_NAME = "compare_2_csvs"
 
 import numpy as np
 import pandas as pd
-from common import RTOL_VALUE, set_up_logger
+from common import RTOL_VALUE, logger
 
 # globals
 DEBUGGING = False
-logger = None
 
 
 def compare_lists(col_name, df_b, df_t, flag_isclose=False, rtol_value=0):
@@ -37,30 +36,31 @@ def compare_lists(col_name, df_b, df_t, flag_isclose=False, rtol_value=0):
     int
         Number of error complaints generated.
     """
-    global logger
     n_complaints = 0
 
     b_list = df_b[col_name].tolist()
     t_list = df_t[col_name].tolist()
     if DEBUGGING:
-        print("DEBUG b_list:", b_list)
-        print("DEBUG df_b:\n", df_b)
+        logger("compare_lists", "DEBUG b_list:", b_list)
+        logger("compare_lists", "DEBUG df_b:\n", df_b)
     for ii, t_item in enumerate(t_list):
         if flag_isclose: # Real-number scalars.
             # NOTE that numpy.isclose() assumes that the 2nd parameter is the reference value.
             # Ref:  https://numpy.org/doc/stable/reference/generated/numpy.isclose.html?highlight=isclose#numpy.isclose
             if np.isclose(float(t_item), float(b_list[ii]), rtol=rtol_value):
-                logger.debug("Row {} for {} ok".format(ii, col_name))
+                if DEBUGGING:
+                    logger("compare_lists", "DEBUG Row {} for {} ok".format(ii, col_name))
             else:
                 n_complaints += 1
-                logger.error("Row {} baseline {}={} but trial value={}, using rtol={}"
+                logger("compare_lists", "ERROR: Row {} baseline {}={} but trial value={}, using rtol={}"
                              .format(ii, col_name, b_list[ii], t_item, rtol_value))
         else: # Not real-number scalars; straight comparison works.
             if t_item == b_list[ii]:
-                logger.debug("Row {} for {} ok".format(ii, col_name))
+                if DEBUGGING:
+                    logger("compare_lists", "DEBUG Row {} for {} ok".format(ii, col_name))
             else:
                 n_complaints += 1
-                logger.error("Row {} baseline {}={} but trial value={}"
+                logger("compare_lists", "ERROR: Row {} baseline {}={} but trial value={}"
                              .format(ii, col_name, b_list[ii], t_item))
 
     return n_complaints
@@ -83,8 +83,6 @@ def compare_tbldat(baseline, trial):
         Number of error complaints generated.
     """
 
-    global logger
-    logger = set_up_logger("compare_tbldat")
     n_complaints = 0
 
     # Load both Dataframes.
@@ -95,9 +93,9 @@ def compare_tbldat(baseline, trial):
     nrows_b = len(df_b)
     nrows_t = len(df_t)
     if DEBUGGING:
-        print("DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
+        logger("compare_tbldat", "DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
     if nrows_t != nrows_b:
-        logger.error("Baseline has {} rows but trial has {} rows"
+        logger("compare_tbldat", "ERROR: Baseline has {} rows but trial has {} rows"
                      .format(nrows_b, nrows_t))
         return 1
 
@@ -129,8 +127,6 @@ def compare_tbldsel(baseline, trial):
         Number of error complaints generated.
     """
 
-    global logger
-    logger = set_up_logger("compare_tbldsel")
     n_complaints = 0
 
     # Load both Dataframes.
@@ -141,9 +137,9 @@ def compare_tbldsel(baseline, trial):
     nrows_b = len(df_b)
     nrows_t = len(df_t)
     if DEBUGGING:
-        print("DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
+        logger("compare_tbldsel", "DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
     if nrows_t != nrows_b:
-        logger.error("Baseline has {} rows but trial has {} rows"
+        logger("compare_tbldsel", "ERROR: Baseline has {} rows but trial has {} rows"
                      .format(nrows_b, nrows_t))
         return 1
 
@@ -174,8 +170,6 @@ def compare_tblnpols(baseline, trial):
         Number of error complaints generated.
     """
 
-    global logger
-    logger = set_up_logger("compare_tblnpols")
     n_complaints = 0
 
     # Load both Dataframes.
@@ -186,9 +180,9 @@ def compare_tblnpols(baseline, trial):
     nrows_b = len(df_b)
     nrows_t = len(df_t)
     if DEBUGGING:
-        print("DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
+        logger("compare_tblnpols", "DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
     if nrows_t != nrows_b:
-        logger.error("Baseline has {} rows but trial has {} rows"
+        logger("compare_tblnpols", "ERROR: Baseline has {} rows but trial has {} rows"
                      .format(nrows_b, nrows_t))
         return 1
 
@@ -245,8 +239,6 @@ def compare_tblhdr(baseline, trial):
         Number of error complaints generated.
     """
 
-    global logger
-    logger = set_up_logger("compare_tblhdr")
     n_complaints = 0
 
     # Load both Dataframes.
@@ -257,9 +249,9 @@ def compare_tblhdr(baseline, trial):
     nrows_b = len(df_b)
     nrows_t = len(df_t)
     if DEBUGGING:
-        print("DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
+        logger("compare_tblhdr", "DEBUG nrows_b={}, nrows_t={}".format(nrows_b, nrows_t))
     if nrows_t != nrows_b:
-        logger.error("Baseline has {} rows but trial has {} rows"
+        logger("compare_tblhdr", "ERROR: Baseline has {} rows but trial has {} rows"
                      .format(nrows_b, nrows_t))
         return 1
 

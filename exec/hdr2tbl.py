@@ -12,7 +12,7 @@ from argparse import ArgumentParser
 from blimpy import Waterfall
 
 # Helpers:
-from common import MY_VERSION, set_up_logger
+from common import MY_VERSION, logger
 
 
 def main(args=None):
@@ -28,18 +28,16 @@ def main(args=None):
 
     """
 
-    # Set up logging.
-    logger = set_up_logger(MY_NAME)
-
     # Create an option parser to get command-line input/arguments
-    parser = ArgumentParser(description="hdr2tbl version {}."
-                                        .format(MY_VERSION))
+    parser = ArgumentParser(description="{} version {}."
+                                        .format(MY_NAME, MY_VERSION))
 
     parser.add_argument("fbfile", type=str, default="", nargs="?",
                         help="Path of .fil or .h5 file to access")
     parser.add_argument("tblfile", type=str, default="", nargs="?",
                         help="Path of .tblhdr file to open for writing")
-    parser.add_argument("-v", "--version", dest="show_version", default=False, action="store_true",
+    parser.add_argument("-v", "--version", dest="show_version", default=False, 
+                        action="store_true",
                         help="show the hdr2tbl version and exit")
 
     # Validate arguments.
@@ -72,7 +70,7 @@ def main(args=None):
         for key in wf.header.keys():
             csvfile.write("{},{}\n".format(key, wf.header[key]))
 
-    logger.info("Saved {}".format(os.path.basename(args.tblfile)))
+    logger(MY_NAME, "Saved {}".format(os.path.basename(args.tblfile)))
 
 
 if __name__ == "__main__":

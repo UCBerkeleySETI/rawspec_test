@@ -22,7 +22,7 @@ from argparse import ArgumentParser
 # Helper functions:
 from site_parameters import BASELINE_DIR, RAWSPECTEST_TBL, \
                             RUN_TURBO_SETI, TRIAL_DIR
-from common import MY_VERSION, oops, set_up_logger
+from common import MY_VERSION, oops, logger
 from compare_2_csvs import compare_tbldat, compare_tblhdr, compare_tblnpols, compare_tbldsel
 
 
@@ -58,16 +58,14 @@ def main(args=None):
         print("installer: {}".format(MY_VERSION))
         sys.exit(0)
 
-    # Set up logging.
     # Initialise error count to zero.
-    logger = set_up_logger(MY_NAME)
     n_errors = 0
 
     # On the right system?
     osinfo = os.uname()
-    logger.info("O/S name = {}, release = {}, version = {}"
+    logger(MY_NAME, "O/S name = {}, release = {}, version = {}"
                 .format(osinfo.sysname, osinfo.release, osinfo.version))
-    logger.info("Node name = {}, CPU type = {}, HOME = {}"
+    logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
                 .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
 
     # BASELINE_DIR exist?
@@ -83,7 +81,7 @@ def main(args=None):
     if RUN_TURBO_SETI:
         for baseline_file in sorted(glob.glob("{}/*.tbldat".format(BASELINE_DIR))):
             basename = os.path.basename(baseline_file)
-            logger.info("Compare baseline and trial for {} .....".format(basename))
+            logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
             trial_file = os.path.join(TRIAL_DIR, basename)
             n_errors += compare_tbldat(baseline_file, trial_file)
 
@@ -91,7 +89,7 @@ def main(args=None):
     # compare it to its counterpart in TRIAL_DIR.
     for baseline_file in sorted(glob.glob("{}/*.tblhdr".format(BASELINE_DIR))):
         basename = os.path.basename(baseline_file)
-        logger.info("Compare baseline and trial for {} .....".format(basename))
+        logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tblhdr(baseline_file, trial_file)
 
@@ -99,21 +97,21 @@ def main(args=None):
     # compare it to its counterpart in TRIAL_DIR.
     for baseline_file in sorted(glob.glob("{}/*.tbldsel".format(BASELINE_DIR))):
         basename = os.path.basename(baseline_file)
-        logger.info("Compare baseline and trial for {} .....".format(basename))
+        logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
         n_errors += compare_tbldsel(baseline_file, trial_file)
 
     # Compare trial to baseline versions o0f rawspectest .tblnpols files.
-    logger.info("Compare baseline and trial for {} .....".format(RAWSPECTEST_TBL))
+    logger(MY_NAME, "Compare baseline and trial for {} .....".format(RAWSPECTEST_TBL))
     baseline = BASELINE_DIR + RAWSPECTEST_TBL
     trial = TRIAL_DIR + RAWSPECTEST_TBL
     n_errors += compare_tblnpols(baseline, trial)
 
     # Bye-bye.
     if n_errors > 0:
-        logger.fatal("*FAILURE* - Number of errors reported = {}".format(n_errors))
+        logger(MY_NAME, "*FAILURE* - Number of errors reported = {}".format(n_errors))
     else:
-        logger.info("*SUCCESS* - No errors reported.")
+        logger(MY_NAME, "*SUCCESS* - No errors reported.")
 
 
 if __name__ == "__main__":
