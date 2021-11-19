@@ -60,8 +60,8 @@ def main(args=None):
 
     # Get Waterfall object.
     wf = Waterfall(args.fbfile)
-    logger(MY_NAME, "Data shape = ({}, {}, {})"
-                .format(wf.n_ints_in_file, wf.header["nifs"], wf.n_channels_in_file))
+    logger(MY_NAME, "Data shape for {} = ({}, {}, {})"
+                .format(args.fbfile, wf.n_ints_in_file, wf.header["nifs"], wf.n_channels_in_file))
     assert wf.n_ints_in_file > 1
     assert wf.n_channels_in_file > 3
 
