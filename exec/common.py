@@ -11,7 +11,7 @@ import logging
 MY_VERSION = "1.2"
 TS_SNR_THRESHOLD = 10 # for turbo_seti
 
-LOGGER_FORMAT = "%(asctime)-8s  %(name)s  %(levelname)s  %(message)s"
+LOGGER_FORMAT = "%(asctime)s  %(name)s  %(levelname)s  %(message)s"
 TIME_FORMAT = "%H:%M:%S"
 
 PANDAS_SEPARATOR = "\s+"
@@ -94,11 +94,13 @@ def set_up_logger(my_name):
     -------
     logger : logging object
     """
-    logging_format = LOGGER_FORMAT
-    logging.basicConfig(format=logging_format,
-                        datefmt=TIME_FORMAT,
-                        level=logging.INFO)
-    logger = logging.getLogger(name=my_name)
-    logger.debug("Logging set up complete.")
+    formatter = logging.Formatter(fmt=LOGGER_FORMAT,
+                                  datefmt=TIME_FORMAT)
+    screen_handler = logging.StreamHandler(stream=sys.stdout)
+    screen_handler.setFormatter(formatter)
+    logger = logging.getLogger(my_name)
+    logger.propagate = False
+    logger.addHandler(screen_handler)
+    logger.setLevel(logging.INFO)
 
     return logger
