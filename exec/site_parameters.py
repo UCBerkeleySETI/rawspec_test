@@ -13,12 +13,13 @@ SOURCE_DIR_1 = "/mnt_blpd5/datax/FRB121102/BLP13/"
 SOURCE_DIR_2 = "/mnt_blpd5/datax/FRB121102/BLP17/"
 
 # The following directory is only used in the UC Berkeley data centre as a source of files to link.
-ATA_DIR = RAWSPEC_TESTING_DIR + "ata/" 
+FROM_ATA_DIR = RAWSPEC_TESTING_DIR + "ata/" 
 
 # List of files to actually link into baseline and trial directories
 SELECTED = [ 
     SOURCE_DIR_1 + "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     SOURCE_DIR_2 + "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
+    FROM_ATA_DIR + "ATA_guppi_59229_47368_006379_40blocks",
     ]
 
 # The rawspec command-line options that are paired to the corresponding entry in SELECTED.
@@ -26,6 +27,7 @@ SELECTED = [
 RAWSPEC_OPTS = [
     "-f 1048576  -t 51",
     "-f 1048576  -t 51",
+    "-f 8192 -t 2 -S -i '1.0'",
     ]
 
 # Baseline directory for measuring trial results to.
