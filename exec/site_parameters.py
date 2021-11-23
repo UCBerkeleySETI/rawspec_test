@@ -26,7 +26,7 @@ SELECTED = [
 # SELECTED and RAWSPEC_OPTS are 1-to-1.
 RAWSPEC_OPTS = [
     "-f 1048576  -t 51",
-    "-f 1048576  -t 51",
+    "-f 1048576,8,1024 -t 51,128,3072",
     "-f 8192 -t 2 -S -i '1.0'",
     ]
 
