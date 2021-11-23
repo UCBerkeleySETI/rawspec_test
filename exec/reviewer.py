@@ -112,6 +112,7 @@ def main(args=None):
         logger(MY_NAME, "*FAILURE* - Number of errors reported = {}".format(n_errors))
     else:
         logger(MY_NAME, "*SUCCESS* - No errors reported.")
+    sys.exit(n_errors)
 
 
 if __name__ == "__main__":
