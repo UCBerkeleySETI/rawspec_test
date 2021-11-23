@@ -168,7 +168,7 @@ def main(args=None):
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
-        logger(MY_NAME, "Skipping post-run cleanup at the operator's request")
+        logger(MY_NAME, "Skipping post-run cleanup.")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
         run_cmd(cmd, ignore_errors=True)
