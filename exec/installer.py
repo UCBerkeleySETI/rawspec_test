@@ -28,7 +28,7 @@ from argparse import ArgumentParser
 
 # Helper functions:
 from site_parameters import BASELINE_DIR, RAWSPEC_OPTS, RAWSPECTEST_TBL, \
-                            RUN_TURBO_SETI, SELECTED
+                            RUN_TURBO_SETI, SELECTED, TESTING_NODE
 from common import MY_VERSION, TS_SNR_THRESHOLD, oops, run_cmd, logger
 import dat2tbl
 import hdr2tbl
@@ -62,14 +62,9 @@ def main(args=None):
                         default=False,
                         action="store_true",
                         help="Flag: Run in batch mode i.e. no interactivity?")
-    parser.add_argument("-S", "--skip_init",
-                        dest="flag_skip_init",
-                        default=False,
-                        action="store_true",
-                        help="Flag: Skip deadstart init and begin with rawspec?  Might be dangerous.")
-    parser.add_argument("-T", "--skip_cleanup",
+    parser.add_argument("-S", "--skip_cleanup",
                         dest="flag_skip_cleanup",
-                        default=False,
+                        default=True,
                         action="store_true",
                         help="Flag: Skip cleanup at end?  Large files are left in baseline.")
     parser.add_argument("-v", "--version",
@@ -91,47 +86,14 @@ def main(args=None):
     # Take a timestamp
     time1 = time.time()
 
-    # Skip initialisation?
-    if args.flag_skip_init:
-        logger(MY_NAME, "Skipping pre-rawspec initialisation at the operator's request")
-    else:
-        # Show system information.
-        osinfo = os.uname()
-        logger(MY_NAME, "O/S name = {}, release = {}, version = {}"
-                    .format(osinfo.sysname, osinfo.release, osinfo.version))
-        logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
-                    .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
-
-        # Interact with the operator if not in batch mode.
-        if not args.flag_batch:
-            logger(MY_NAME, "This utility script is about to initialise the rawspec test baseline.")
-            logger(MY_NAME, "Baseline directory will be {}.".format(BASELINE_DIR))
-            logger(MY_NAME, "The first step is to remove old artifacts if they exist.")
-            answer = input("\ninstaller: Okay to proceed? (yes/[anything_else=no]: ")
-            if answer != "yes":
-                logger("installer", "Execution canceled by the operator.")
-                sys.exit(0)
-
-        # BASELINE_DIR exists?
-        if not os.path.exists(BASELINE_DIR): # No, it does not.
-            oops("Baseline {} does not exist !!".format(BASELINE_DIR))
-
-        # Remove old artifacts.
-        cmd = "rm -rf {}/*".format(BASELINE_DIR)
-        run_cmd(cmd, ignore_errors=True)
-
-        # Copy the selected files to BASELINE_DIR.
-        counter = 0
-        for one_item in SELECTED:
-            the_raw_file_list = sorted(glob.glob("{}*.raw".format(one_item)))
-            for one_file in the_raw_file_list:
-                try:
-                    cmd = "ln -s {} {}/{}".format(one_file, BASELINE_DIR, os.path.basename(one_file))
-                    run_cmd(cmd, logger)
-                except:
-                    oops("{} FAILED".format(cmd))
-                counter += 1
-        logger(MY_NAME, "Linked {} files.".format(counter))
+    # Show system information.
+    osinfo = os.uname()
+    logger(MY_NAME, "O/S name = {}, release = {}, version = {}"
+                .format(osinfo.sysname, osinfo.release, osinfo.version))
+    logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
+                .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
+    if osinfo.nodename != TESTING_NODE:
+        oops("Node name must be {}".format(TESTING_NODE))
 
     # Initialisation is complete.
     # Go to BASELINE_DIR..
@@ -143,13 +105,12 @@ def main(args=None):
 
     # For each unique file stem, run rawspec.
     # Note: If a rawspec file is X.0000.raw then its rawstem is X.
-    for ii, path_prefix in enumerate(SELECTED):
-        rawstem = os.path.basename(path_prefix)
+    for ii, rawstem in enumerate(SELECTED):
         rawspec_opts = RAWSPEC_OPTS[ii]
         cmd = "rawspec  {}  -g {}  {}".format(rawspec_opts, args.gpu_id, rawstem)
         run_cmd(cmd, logger)
 
-    # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
+    # For each unique .fil file, run turbo_seti (optionally), dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
         if RUN_TURBO_SETI:
             cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
@@ -180,7 +141,7 @@ def main(args=None):
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
-        logger(MY_NAME, "Skipping post-run cleanup at the operator's request")
+        logger(MY_NAME, "Skipping post-run cleanup.")
     else:
         cmd = "rm *.dat *.fil *.h5 *.log"
         run_cmd(cmd, ignore_errors=True)

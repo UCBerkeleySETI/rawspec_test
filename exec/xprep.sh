@@ -2,8 +2,8 @@
 # Install the rawspec repository that is to be tested.
 # Prerequisite: xinstall.sh (caution!)
 
-URL='DUMMY'
-BRANCH='DUMMY'
+URL='https://github.com/texadactyl/rawspec'
+BRANCH='master'
 
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log

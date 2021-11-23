@@ -71,7 +71,7 @@ fi
 # Make the baseline github copy of rawspec
 echo 2>&1 | tee -a $LOG
 cd rawspec
-echo 'Begin make baseline rawspec .....' 2>&1 | tee -a $LOG
+echo 'Begin make of rawspec .....' 2>&1 | tee -a $LOG
 make 2>&1 | tee -a $LOG
 if [ $? -ne 0 ]; then
     oops 'make FAILED'
