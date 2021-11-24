@@ -4,7 +4,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 ## 1.0 Rawspec Testing Directory Tree Overview
 
-The ```rawspec``` testing directory tree is rooted at  ```/datax/scratch/rawspec_testing/``` on data centre compute node ```blpc1```.  There are 2 subdirectories underneath:
+The ```rawspec``` testing directory tree is rooted at  ```/mnt_blpd20/scratch/rawspec_testing/``` on data centre compute node ```blpc1```.  There are 2 subdirectories underneath:
 * ```baseline``` - Expected results.  See discussion of ```xinstall.sh```.
 * ```trial``` - Trial results from a candidate for updating the ```rawspec``` master branch at UCBerkeleySETI on github.  A PR is an example of such a candidate.  See discussion of ```xtest.sh``` 
 
@@ -70,7 +70,7 @@ The module ```exec/site_parameters.py``` contains all of the site parameters.  E
 
 Before doing anything else related to rawspec_testing, follow this procedure.
 
-* Login to data centre node blpc1.
+* Login to any data centre node.
 * If this repository (rawspec_testing) has not yet been installed, then go $HOME and do the following:
      - ```git clone https://github.com/UCBerkeleySETI/rawspec_testing```.
 * Install/reinstall blimpy: ```pip  install  -U  --user  blimpy```.
@@ -81,14 +81,14 @@ Before doing anything else related to rawspec_testing, follow this procedure.
 
 IMPORTANT: This procedure is unnecessary for PR testing and has the potential to be disruptive.  It should only be performed when there are changes to the site parameters or to the baseline .raw file data itself.
 
-* Login to data centre node blpc1.
+* Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
 * If needed, edit ```site_parameters.py``` as mentioned above.
 * ```bash xinstall.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ### 3.2 Testing a New Pull Request
 
-* Login to data centre node blpc1.
+* Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
 * Edit the ```xprep.sh``` script to supply the PR's URL value and the specific BRANCH name value.  The URL string should end in “…./rawspec”.
 * An alternative is to use JupyterLab or Visual Studio Code to edit the ```xprep.sh``` script.
