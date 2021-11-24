@@ -2,7 +2,7 @@
 
 The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request (PR) is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
 
-## 1.0 Testing Baseline Overview
+## 1.0 Rawspec Testing Directory Tree Overview
 
 The ```rawspec``` testing directory tree is rooted at  ```/datax/scratch/rawspec_testing/``` on data centre compute node ```blpc1```.  There are 2 subdirectories underneath:
 * ```baseline``` - Expected results.  See discussion of ```xinstall.sh```.
