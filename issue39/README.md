@@ -16,7 +16,7 @@ Rawspec issue 39 is about an anomaly observed when switching between GPU devices
 
 ## Execution
 * Run  ```rungen.sh```.
-* Run  ```rundiffs.sh```.
+* Run  ```rundiffs.sh  <COMPARATOR_GPU_ID>```.
 
 ## Observe
 * All the stdout from 3 ```diff``` executions should be nil.
