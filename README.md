@@ -6,7 +6,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 The ```rawspec``` testing directory tree is rooted at  ```/datax/scratch/rawspec_testing/``` on data centre compute node ```blpc1```.  There are 2 subdirectories underneath:
 * ```baseline``` - Expected results.  Produced by running ```xinstall.sh```.
-* ```trial``` - Trial results, produced by execution of a candidate for updating the ```rawspec``` master branch at UCBerkeleySETI on github.  A PR is an example of such a candidate.
+* ```trial``` - Trial results, produced by running ```xtest.sh``` with a candidate for updating the ```rawspec``` master branch at UCBerkeleySETI on github.  A PR is an example of such a candidate.
 
 The ```baseline``` subdirectory consists of the following:
 * Input GBT .raw files provided by @mattlebofsky (Matt Lebofsky):
