@@ -6,7 +6,7 @@ The purpose of this repository is to support regression testing whenever a ```ra
 
 The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing/baseline/``` and consists of the following:
 * GBT .raw files provided by @mattlebofsky (Matt Lebofsky).
-* An ATA-supplied test .raw file used to produce 2 antenna output .fil files and one incoherent sum (ics) output .fil file.
+* An ATA-supplied synthetic .raw file used to produce 2 antenna output .fil files and one incoherent sum (ics) output .fil file.
 * 2 table files for each output .fil file as a result of running ```rawspec```.
 * 1 table file produced by a rawspectest session.
 
