@@ -1,11 +1,9 @@
-source rungpu.cfg
-
 set -e
 set -o pipefail
 
 export PATH=$HOME/rawspec:$PATH
 export LD_LIBRARY_PATH=$HOME/rawspec
-STEM=/mnt_blpd20/scratch/rawspec_testing/baseline//ATA_guppi_59229_47368_006379_40blocks
+STEM=/datax/scratch/rawspec_testing/baseline//ATA_guppi_59229_47368_006379_40blocks
 PARMS='-f 8192 -t 2 -S -i '1.0'  -d . '
 
 function oops {
@@ -33,7 +31,8 @@ function testsession {
 
 rm gpu*.*
 
-testsession $GPUA
-
-testsession $GPUB
+testsession 0
+testsession 1
+testsession 2
+testsession 3
 
