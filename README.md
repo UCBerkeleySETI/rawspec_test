@@ -1,23 +1,32 @@
 # rawspec_testing
 
-The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
+The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request (PR) is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
 
 ## 1.0 Testing Baseline Overview
 
-The ```rawspec``` testing baseline resides at  ```/mnt_blpd20/scratch/rawspec_testing/baseline/``` and consists of the following:
-* GBT .raw files provided by @mattlebofsky (Matt Lebofsky).
-* An ATA-supplied synthetic .raw file used to produce 2 antenna output .fil files and one incoherent sum (ics) output .fil file.
-* 2 table files for each output .fil file as a result of running ```rawspec```.
-* 1 table file produced by a rawspectest session.
+The ```rawspec``` testing directory tree is rooted at  ```/datax/scratch/rawspec_testing/``` on data centre compute node ```blpc1```.  There are 2 subdirectories underneath:
+* ```baseline``` - Expected results.  Produced by running ```xinstall.sh```.
+* ```trial``` - Trial results, produced by execution of a candidate for updating the ```rawspec``` master branch at UCBerkeleySETI on github.  A PR is an example of such a candidate.
+
+The ```baseline``` subdirectory consists of the following:
+* Input GBT .raw files provided by @mattlebofsky (Matt Lebofsky):
+     - FRB .raw files, used to produce a single output .fil file.
+     - Pulsar .raw files, used to produce 3 output .fil files, an exercise of output product multithreading.
+* An input ATA-supplied synthetic .raw file, used to produce:
+     - 2 antenna output .fil files.
+     - 1 incoherent sum (ics) output .fil file.
+* The intermediate .fil files, produced by ```rawspec```.
+* 2 output table files for each .fil file, created by Python test utilities.
+* 1 output table file produced after running ```rawspectest```, created by another Python test utility.
 
 The table files are as follows:
-* ```*.tblhdr``` Filterbank header fields with a row for the number of integrations added.
-* ```*.tbldsel``` Selected Filterbank data fields.
+* ```*.tblhdr``` Filterbank header fields, 1 row per field, plus 1 row for the number of integrations as an addition.
+* ```*.tbldsel``` Selected Filterbank data matrix fields.  Currently, 15 values are recorded: 3 each at the 4 data corners plus 3 at the centre.
 * ```rawspectest.tblnpols``` Output from a rawspectest session with ```nbits``` values of 4, 8, and 16.
 
 All table file types are implemented as CSV files.
 
-The following is a listing of the testing baseline directory:
+The following is a listing of the baseline subdirectory:
 ```
 ATA_guppi_59229_47368_006379_40blocks.0000.raw
 ATA_guppi_59229_47368_006379_40blocks-ant000.rawspec.0000.fil
