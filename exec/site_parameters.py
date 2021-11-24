@@ -5,10 +5,11 @@ Site parameters.
 The following definitions reflect the UC Berkeley data centre compute nodes.
 """
 
-TESTING_NODE = "blpc1"
+TESTING_NODE = "any"
 
 # The root of all rawspec_testing artifacts.
-RAWSPEC_TESTING_DIR = "/datax/scratch/rawspec_testing/"
+### local to a node: RAWSPEC_TESTING_DIR = "/datax/scratch/rawspec_testing/"
+RAWSPEC_TESTING_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
 
 # List of files to actually link into baseline and trial directories
 SELECTED = [ 

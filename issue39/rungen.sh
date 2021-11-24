@@ -1,3 +1,5 @@
+source rungpu.cfg
+
 set -e
 set -o pipefail
 
@@ -14,7 +16,7 @@ function oops {
 }
 
 function testsession {
-    LOG=gpu_$1.log
+    LOG=gpu$1.log
     echo 2>&1 | tee $LOG
     echo Start GPU $1 2>&1 | tee -a $LOG
     (set -x; rawspec -g $1 $PARMS $STEM 2>&1 | tee -a $LOG)
@@ -29,7 +31,9 @@ function testsession {
     python3 dsel2tbl.py ATA_guppi_59229_47368_006379_40blocks-ics.rawspec.0000.fil gpu$1.ics.tbldsel 2>&1 | tee -a $LOG
 }
 
-testsession 2
+rm gpu*.*
 
-testsession 3
+testsession $GPUA
+
+testsession $GPUB
 

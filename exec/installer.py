@@ -92,8 +92,9 @@ def main(args=None):
                 .format(osinfo.sysname, osinfo.release, osinfo.version))
     logger(MY_NAME, "Node name = {}, CPU type = {}, HOME = {}"
                 .format(osinfo.nodename, osinfo.machine, os.environ["HOME"]))
-    if osinfo.nodename != TESTING_NODE:
-        oops("Node name must be {}".format(TESTING_NODE))
+    if TESTING_NODE != "any":
+        if osinfo.nodename != TESTING_NODE:
+            oops("Node name must be {}".format(TESTING_NODE))
 
     # Initialisation is complete.
     # Go to BASELINE_DIR..
