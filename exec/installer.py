@@ -57,11 +57,6 @@ def main(args=None):
                         type=int,
                         required=True,
                         help="GPU device ID (0-3) to use in rawspec")
-    parser.add_argument("-b", "--batch",
-                        dest="flag_batch",
-                        default=False,
-                        action="store_true",
-                        help="Flag: Run in batch mode i.e. no interactivity?")
     parser.add_argument("-S", "--skip_cleanup",
                         dest="flag_skip_cleanup",
                         default=True,
