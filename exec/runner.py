@@ -128,6 +128,7 @@ def main(args=None):
     # Go to TRIAL_DIR.
     try:
         os.chdir(TRIAL_DIR)
+        logger(MY_NAME, "Current directory is now {}".format(TRIAL_DIR))
     except:
         oops("os.chdir({}) FAILED !!".format(TRIAL_DIR))
 
@@ -136,14 +137,14 @@ def main(args=None):
     for ii, rawstem in enumerate(SELECTED):
         rawspec_opts = RAWSPEC_OPTS[ii]
         cmd = "rawspec  {}  {}  -g {}  -d .  {}/{}".format(rawspec_opts, fbh5_opt, args.gpu_id, BASELINE_DIR, rawstem)
-        run_cmd(cmd, logger)
+        run_cmd(cmd)
 
     # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
     for fb_file in sorted(glob.glob("*{}".format(fileext))):
         if RUN_TURBO_SETI:
             cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
                   .format(TS_SNR_THRESHOLD, args.gpu_id, fb_file)
-            run_cmd(cmd, logger)
+            run_cmd(cmd)
             dat_name = fb_file.split("/")[-1].replace(fileext, ".dat")
             tbldat_name = fb_file.split("/")[-1].replace(fileext, '.tbldat')
             try:
