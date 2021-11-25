@@ -101,6 +101,8 @@ def main(args=None):
     try:
         os.chdir(BASELINE_DIR)
         logger(MY_NAME, "Current directory is now {}".format(BASELINE_DIR))
+        cmd = "rm *.fil *.tbldsel *.tblhdr *.tblnpols"
+        run_cmd(cmd, ignore_errors=True)
     except:
         oops("os.chdir({}) FAILED".format(BASELINE_DIR))
 
@@ -109,14 +111,14 @@ def main(args=None):
     for ii, rawstem in enumerate(SELECTED):
         rawspec_opts = RAWSPEC_OPTS[ii]
         cmd = "rawspec  {}  -g {}  {}".format(rawspec_opts, args.gpu_id, rawstem)
-        run_cmd(cmd, logger)
+        run_cmd(cmd)
 
     # For each unique .fil file, run turbo_seti (optionally), dat2tbl, and hdr2tbl.
     for filfile in sorted(glob.glob("*.fil")):
         if RUN_TURBO_SETI:
             cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
                   .format(TS_SNR_THRESHOLD, args.gpu_id, filfile)
-            run_cmd(cmd, logger)
+            run_cmd(cmd)
             dat_name = filfile.split('/')[-1].replace(".fil", ".dat")
             tbldat_name = filfile.split('/')[-1].replace(".fil", '.tbldat')
             try:
