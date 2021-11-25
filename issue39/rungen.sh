@@ -21,12 +21,12 @@ function testsession {
     if [ $? -ne 0 ]; then
         oops rawspec exit status $?
     fi
-    python3 dsel2tbl.py ATA_guppi_59229_47368_006379_40blocks-ant000.rawspec.0000.fil gpu$1.ant000.tbldsel 2>&1 | tee -a $LOG
+    python3 dsel2tbl.py $STEM-ant000.rawspec.0000.fil gpu$1.ant000.tbldsel 2>&1 | tee -a $LOG
     if [ $? -ne 0 ]; then
         oops dsel2tbl.py exit status $?
     fi
-    python3 dsel2tbl.py ATA_guppi_59229_47368_006379_40blocks-ant001.rawspec.0000.fil gpu$1.ant001.tbldsel 2>&1 | tee -a $LOG
-    python3 dsel2tbl.py ATA_guppi_59229_47368_006379_40blocks-ics.rawspec.0000.fil gpu$1.ics.tbldsel 2>&1 | tee -a $LOG
+    python3 dsel2tbl.py $STEM-ant001.rawspec.0000.fil gpu$1.ant001.tbldsel 2>&1 | tee -a $LOG
+    python3 dsel2tbl.py $STEM-ics.rawspec.0000.fil gpu$1.ics.tbldsel 2>&1 | tee -a $LOG
 }
 
 rm gpu*.*
