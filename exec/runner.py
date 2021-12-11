@@ -139,7 +139,12 @@ def main(args=None):
         cmd = "rawspec  {}  {}  -g {}  -d .  {}/{}".format(rawspec_opts, fbh5_opt, args.gpu_id, BASELINE_DIR, rawstem)
         run_cmd(cmd)
 
-    # For each unique 0000.fil, run turbo_seti, dat2tbl, and hdr2tbl.
+    # For each unique 0000.fil/.h5, create tables.
+    for fb_file in sorted(glob.glob("*{}".format(fileext))):
+        file_size = os.path.getsize(fb_file) / 1e6
+        logger(MY_NAME, "Size of {} = {:.1f} MiB".format(fb_file, file_size))
+
+    # For each unique 0000.fil/.h5, create tables.
     for fb_file in sorted(glob.glob("*{}".format(fileext))):
         if RUN_TURBO_SETI:
             cmd = "turboSETI  --snr {}  --gpu y  --gpu_id {}  --n_coarse_chan 64  {}" \
