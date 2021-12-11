@@ -6,7 +6,7 @@ Common definitions and functions.
 
 import os
 import sys
-from time import strftime, localtime
+from time import strftime, localtime, time
 
 MY_VERSION = "1.2"
 TS_SNR_THRESHOLD = 10 # for turbo_seti
@@ -61,7 +61,9 @@ def run_cmd(cmd, ignore_errors=False):
         stdout_path = "{}/stdout.txt".format(here)
         stderr_path = "{}/stderr.txt".format(here)
         extcmd = cmd + " 1>{} 2>{}".format(stdout_path, stderr_path)
+        t1 = time()
         exit_status = os.system(extcmd)
+        t2 = time()
         if ignore_errors:
             return
         stderr_size = os.path.getsize(stderr_path)
@@ -73,6 +75,7 @@ def run_cmd(cmd, ignore_errors=False):
                 for line in lines:
                     print(line)
             oops("Cannot continue")
+        logger("run_cmd", "   E.T. = {:.1f} s".format(t2 - t1))
     except Exception as exc:
         oops("os.system({}) EXCEPTION {}"
              .format(cmd, exc))
