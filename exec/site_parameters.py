@@ -11,7 +11,7 @@ TESTING_NODE = "any"
 ### local to a node: RAWSPEC_TESTING_DIR = "/datax/scratch/rawspec_testing/"
 RAWSPEC_TESTING_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
 
-# List of files to actually link into baseline and trial directories
+# List of file stems used.
 SELECTED = [ 
     "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
