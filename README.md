@@ -28,7 +28,7 @@ All table file types are implemented as CSV files.
 
 The ```trial``` subdirectory contains the same intermediate and output files.  Note that there are no .raw files in the trial subdirectory.
 
-The following is a listing of the baseline subdirectory:
+The following is a listing of the baseline subdirectory in the UCB Data Centre:
 ```
 ATA_guppi_59229_47368_006379_40blocks.0000.raw
 ATA_guppi_59229_47368_006379_40blocks-ant000.rawspec.0000.fil
@@ -83,17 +83,18 @@ IMPORTANT: This procedure is unnecessary for PR testing and has the potential to
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
-* If needed, edit ```site_parameters.py``` as mentioned above.
+* Edit ```site_parameters.py``` as appropriate for the new/updated local site.
 * ```bash xinstall.sh  <GPU_ID (0, 2, 3, or 3)>```
 
 ### 3.2 Testing a New Pull Request
 
 * Login to any data centre node.
 * Go to $HOME/rawspec_testing/exec 
-* Edit the ```xprep.sh``` script to supply the PR's URL value and the specific BRANCH name value.  The URL string should end in “…./rawspec”.
-* An alternative is to use JupyterLab or Visual Studio Code to edit the ```xprep.sh``` script.
+* With nano, edit the ```xprep.sh``` script to supply the PR's main URL value and the specific BRANCH name value.  The URL string should end in “…./rawspec”.
+* An alternative is to use the Visual Studio Code GUI to edit the ```xprep.sh``` script.
 * Then, run ```bash xprep.sh``` to set up testing with the PR code base.
 * Finally, run ```bash xtest.sh  <GPU_ID (0, 2, 3, or 3)>```
+* Success should be announced on both the SIGPROC and FBH5 sections of testing.
 
 ## 4.0 Bash Script Design Overviews
 
