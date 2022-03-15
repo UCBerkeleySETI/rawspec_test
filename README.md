@@ -15,6 +15,8 @@ The ```baseline``` subdirectory at the UCB data centre consists of the following
 * A single **input** ATA-supplied synthetic .raw file, used to produce:
      - 2 antenna output .fil files.
      - 1 incoherent sum (ics) output .fil file.
+
+At any site, the following files will be created by running regression testing suite as defined in ```exec/site_parameters.py```.
 * The **intermediate** .fil files, produced by ```rawspec```.
 * Two **output** table files for each .fil file, created by Python test utilities.
 * One **output** table file produced after running ```rawspectest```, created by another Python test utility.
