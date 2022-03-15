@@ -8,7 +8,7 @@ The ```rawspec``` testing directory tree is rooted at  ```/mnt_blpd20/scratch/ra
 * ```baseline``` - Expected results.  See discussion of ```xinstall.sh```.
 * ```trial``` - Trial results from a candidate for updating the ```rawspec``` master branch at UCBerkeleySETI on github.  A PR is an example of such a candidate.  See discussion of ```xtest.sh``` 
 
-The ```baseline``` subdirectory consists of the following:
+The ```baseline``` subdirectory at the UCB data centre consists of the following:
 * **Input** GBT .raw files provided by @mattlebofsky (Matt Lebofsky):
      - FRB .raw files, used to produce a single output .fil file.
      - Pulsar .raw files, used to produce 3 output .fil files, an exercise of output product multithreading.
