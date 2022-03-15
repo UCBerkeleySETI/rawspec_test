@@ -1,6 +1,6 @@
 # rawspec_testing
 
-The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request (PR) is entertained.  In addition, it can be used by a developer on demand to augment unit-testing.
+The purpose of this repository is to support regression testing whenever a ```rawspec``` Pull Request (PR) is entertained.  In addition, a developer should use it as part of unit-testing to ensure that nothing was inadvertently broken.
 
 ## 1.0 Rawspec Testing Directory Tree Overview
 
