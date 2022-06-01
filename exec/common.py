@@ -67,7 +67,7 @@ def run_cmd(cmd, ignore_errors=False):
         if ignore_errors:
             return
         stderr_size = os.path.getsize(stderr_path)
-        if exit_status != 0 or stderr_size > 0:
+        if exit_status != 0:
             logger("run_cmd", "os.system({}) FAILED.\nReturned exit status {}, stderr follows:"
                          .format(cmd, exit_status))
             with open(stderr_path, "r") as fh:
