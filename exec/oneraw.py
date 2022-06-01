@@ -1,18 +1,13 @@
 """
 Package rawspec_testing
 
-installer.py: Creates/recreates the rawspec testing baseline.
+oneraw.py: Creates/recreates one fil file and its related tables in the rawspec testing baseline.
 
-* If an old version of the baseline artifacts are present, remove them.
-* Copy over selected .raw files
-    from one of the source directories
-    to the baseline directory.
-* For each .raw file in the baseline directory, do the following:
+* For the specified .raw file stem in the baseline directory, do the following:
     - rawspec   <rawspec options>   <.raw file prefix>
-* For each SIGPROC Filterbank file file in the baseline directory produced by rawspec, do the following:
+* With the .fil file in the baseline directory produced by rawspec, do the following:
     - Create a .tblhdr file.
     - Create a .tbldsel file.
-* Cleanup: rm  *.fil  *.h5  *.dat  *.log in the baseline directory.
 """
 
 MY_NAME = "installer"
@@ -48,8 +43,11 @@ def main(args=None):
     """
 
     # Create an option parser to get command-line input/arguments
-    parser = ArgumentParser(description="installer version {}."
+    parser = ArgumentParser(description="install one raw file, version {}."
                                         .format(MY_VERSION))
+    parser.add_argument("instem",
+                        type=str,
+                        help="Path of input .raw file stem to use as input to rawspec")
     parser.add_argument("-g", "--gpu_id",
                         dest="gpu_id",
                         type=int,
@@ -94,20 +92,20 @@ def main(args=None):
     try:
         os.chdir(BASELINE_DIR)
         logger(MY_NAME, "Current directory is now {}".format(BASELINE_DIR))
-        cmd = "rm *.fil *.tbldsel *.tblhdr *.tblnpols"
-        run_cmd(cmd, ignore_errors=True)
     except:
         oops("os.chdir({}) FAILED".format(BASELINE_DIR))
 
     # For each unique file stem, run rawspec.
     # Note: If a rawspec file is X.0000.raw then its rawstem is X.
     for ii, rawstem in enumerate(SELECTED):
-        rawspec_opts = RAWSPEC_OPTS[ii]
-        cmd = "rawspec  {}  -g {}  {}".format(rawspec_opts, args.gpu_id, rawstem)
-        run_cmd(cmd)
+        if rawstem == args.instem:
+            rawspec_opts = RAWSPEC_OPTS[ii]
+            cmd = "rawspec  {}  -g {}  {}".format(rawspec_opts, args.gpu_id, rawstem)
+            run_cmd(cmd)
+            break
 
-    # For each unique .fil file, run dat2tbl and hdr2tbl.
-    for filfile in sorted(glob.glob("*.fil")):
+    # For the .fil file that matches the input stem, run dat2tbl and hdr2tbl.
+    for filfile in sorted(glob.glob(f"{args.instem}*.fil")):
         tblhdr_name = filfile.split('/')[-1].replace(".fil", ".tblhdr")
         try:
             hdr2tbl.main([filfile, tblhdr_name])
@@ -120,10 +118,6 @@ def main(args=None):
             oops("dsel2tbl.main({}, {}) FAILED".format(filfile, tbldsel_name))
 
         logger(MY_NAME, "Created tables for {}.".format(filfile))
-
-    # Create rawspectest baseline table.
-    tblnpols_name = BASELINE_DIR + RAWSPECTEST_TBL
-    npols2tbl.main([tblnpols_name])
 
     # Do post-run cleanup.
     if args.flag_skip_cleanup:
