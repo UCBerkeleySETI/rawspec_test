@@ -16,6 +16,7 @@ SELECTED = [
     "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
     "ATA_guppi_59229_47368_006379_40blocks",
     "ATA_guppi_59229_47368_006379_40blocks",
+    "ATA_guppi_59730_78085_225768981_J0332+5434_off_0001-beam0000",
     ]
 
 # The rawspec command-line options that are paired to the corresponding entry in SELECTED.
@@ -25,6 +26,7 @@ RAWSPEC_OPTS = [
     "-f 1048576,8,1024 -t 51,128,3072",
     "-f 8192 -t 2 -i '1.0'",
     "-f 8192 -t 2 -S",
+    "-f 1 -t 32",
     ]
 
 # Baseline directory for measuring trial results to.
