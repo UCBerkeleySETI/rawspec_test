@@ -35,6 +35,7 @@ GPU_ID=$1
 Q_USE_H5=$2
 
 check_gpu_id $GPU_ID
+export CUDA_VISIBLE_DEVICES=$GPU_ID
 
 export PATH=$HOME/rawspec:$PATH
 export LD_LIBRARY_PATH=$HOME/rawspec
