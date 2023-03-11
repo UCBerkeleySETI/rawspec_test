@@ -11,6 +11,7 @@ TESTING_NODE = "any"
 RAWSPEC_TESTING_DIR = "/mnt_blpd20/scratch/rawspec_testing/"
 
 # List of file stems used.
+# SELECTED and RAWSPEC_OPTS are 1-to-1.
 SELECTED = [ 
     "blc13_guppi_57991_49836_DIAG_FRB121102_0010",
     "blc17_guppi_57991_49318_DIAG_PSR_J0332+5434_0008",
