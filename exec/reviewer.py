@@ -83,7 +83,8 @@ def main(args=None):
             basename = os.path.basename(baseline_file)
             logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
             trial_file = os.path.join(TRIAL_DIR, basename)
-            n_errors += compare_tbldat(baseline_file, trial_file)
+            if os.path.isfile(trial_file): # If nonexistent, then it was commented out in site_parameters.py
+                n_errors += compare_tbldat(baseline_file, trial_file)
 
     # For each unique .tblhdr file in BASELINE_DIR,
     # compare it to its counterpart in TRIAL_DIR.
@@ -91,7 +92,8 @@ def main(args=None):
         basename = os.path.basename(baseline_file)
         logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
-        n_errors += compare_tblhdr(baseline_file, trial_file)
+        if os.path.isfile(trial_file): # If nonexistent, then it was commented out in site_parameters.py
+            n_errors += compare_tblhdr(baseline_file, trial_file)
 
     # For each unique .tbldsel file in BASELINE_DIR,
     # compare it to its counterpart in TRIAL_DIR.
@@ -99,7 +101,8 @@ def main(args=None):
         basename = os.path.basename(baseline_file)
         logger(MY_NAME, "Compare baseline and trial for {} .....".format(basename))
         trial_file = os.path.join(TRIAL_DIR, basename)
-        n_errors += compare_tbldsel(baseline_file, trial_file)
+        if os.path.isfile(trial_file): # If nonexistent, then it was commented out in site_parameters.py
+            n_errors += compare_tbldsel(baseline_file, trial_file)
 
     # Compare trial to baseline versions o0f rawspectest .tblnpols files.
     logger(MY_NAME, "Compare baseline and trial for {} .....".format(RAWSPECTEST_TBL))
