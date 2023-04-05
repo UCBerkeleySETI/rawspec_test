@@ -1,6 +1,12 @@
 # Package rawspec_testing
 # Prepare the baseline directory for testing.
 
+# Safe bash script practice:
+# * raise an error in case any command in the script fails
+# * print the commands as they are run
+# * raise an error in case of unset variables
+set -euo pipefail
+
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
 > $LOG # Make the log nil.
