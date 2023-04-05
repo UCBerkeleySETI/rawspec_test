@@ -2,12 +2,15 @@
 # Execute testing.
 # Prerequisite: xprep.sh
 #
+# Safe bash script practice:
+# * raise an error in case any command in the script fails
+# * print the commands as they are run
+# * raise an error in case of unset variables
+set -euo pipefail
 
 HERE=`pwd`
 LOG=${HERE}/`basename $0`.log
 > $LOG # Make the log nil.
-set -e
-set -o pipefail
 
 function oops {
 	echo
