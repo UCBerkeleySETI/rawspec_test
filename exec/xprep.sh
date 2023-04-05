@@ -2,6 +2,12 @@
 # Install the rawspec repository that is to be tested.
 # Prerequisite: xinstall.sh (caution!)
 
+# Safe bash script practice:
+# * raise an error in case any command in the script fails
+# * print the commands as they are run
+# * raise an error in case of unset variables
+set -euo pipefail
+
 URL='DUMMY'
 BRANCH='DUMMY'
 
